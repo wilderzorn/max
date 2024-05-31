@@ -1,0 +1,3 @@
+[submodule "src/tool"]
+	path = src/tool
+	url = https://github.com/wilderzorn/max-tool.git

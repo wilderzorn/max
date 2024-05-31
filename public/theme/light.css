@@ -1,0 +1,60 @@
+:root {
+  /* 中性色 */
+  --bg: #edf0f5;
+  --bg-menu: #f7faff;
+  --bg-main: #ffffff;
+  --bg-weak: #fafafa;
+  --bg-click: rgba(0, 107, 224, 0.05);
+  --bg-form: #f3f3f3;
+  --bg-selected: rgba(0, 107, 224, 0.1);
+  --bd: rgba(0, 0, 0, 0.1);
+  --bg-mask: rgba(0, 0, 0, 0.6);
+  --bg-thumb: #6a6a6a;
+
+  /* 文本颜色 */
+  --font: #000;
+  --font-a60: rgba(0, 0, 0, 0.6);
+  --font-a40: rgba(0, 0, 0, 0.4);
+  --font-a26: rgba(0, 0, 0, 0.26);
+  --font-a10: rgba(0, 0, 0, 0.1);
+  --font-invert: #fff;
+  --font-white: #fff;
+
+  /* 按钮色 */
+  --btn: #006be0;
+  --btn-hover: #007aff;
+  --btn-active: #0053ad;
+  --btn2: #e0e0e0;
+  --btn2-hover: #f0f0f0;
+  --btn2-active: #d1d1d1;
+  --btn-disabled: #f3f3f3;
+  --tab-active: #e0e0e0;
+
+  /* 主题色&功能色 */
+  --base: #006be0;
+  --base-bg: #f0f7ff;
+  --succee: #00a854;
+  --succee-bg: #f3fcf7;
+  --fail: #d9342b;
+  --fail-bg: #fff4f3;
+  --warn: #d9860b;
+  --warn-bg: #fff9f0;
+  --note: #d9b60b;
+  --note-bg: #fffcf0;
+  --status-bg: #f0f0f0;
+
+  /* 分类图表色 */
+  ---1: #006be0;
+  ---2: #2a90bf;
+  ---3: #00a854;
+  ---4: #d9b60b;
+  ---5: #d9342b;
+  ---6: #4b4ab8;
+  ---7: #d9860b;
+  ---8: #00a8a3;
+  ---9: #9144b8;
+  ---10: #8f7453;
+  /* 列表 */
+  --table-row-bg1: #efefef;
+  --table-row-bg2: #f3f3f3;
+}

@@ -1,0 +1,62 @@
+{
+  "private": true,
+  "author": "wilderzorn <wilderzorn@163.com>",
+  "name": "maxweb",
+  "scripts": {
+    "analyze": "cross-env ANALYZE=1 max build",
+    "build": "cross-env UMI_ENV=release max build",
+    "build:dev": "cross-env UMI_ENV=dev max build",
+    "commitlint": "commitlint --edit",
+    "dev": "cross-env CLIENT_ENV=dev max dev",
+    "format": "prettier --cache --write .",
+    "postinstall": "max setup",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
+    "precommit": "lint-staged",
+    "prepare": "husky install",
+    "preview": "max preview",
+    "setup": "max setup",
+    "start": "npm run dev"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -e  $GIT_PARAMS"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,md}": [
+      "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-components": "^2.4.4",
+    "@umijs/max": "^4.2.5",
+    "ahooks": "^3.7.11",
+    "antd": "^5.4.0",
+    "antd-style": "^3.6.2",
+    "classnames": "^2.5.1",
+    "events": "^3.3.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "rc-notification": "^5.5.0",
+    "react-virtualized": "^9.22.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-virtualized": "^9.21.30",
+    "@umijs/fabric": "2.14.1",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.7",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "prettier-plugin-packagejson": "^2.4.3",
+    "typescript": "5.0.3"
+  }
+}
