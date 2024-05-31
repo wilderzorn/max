@@ -2,7 +2,7 @@ import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
 import styles from './index.less';
-import { setAuthorization } from '@/utils/authority';
+import { setAuthorization } from '#/utils/authority';
 import { history } from '@umijs/max';
 
 type FieldType = {

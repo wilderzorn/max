@@ -78,4 +78,7 @@ export default defineConfig({
   mfsu: {
     strategy: 'normal',
   },
+  alias: {
+    '#': '/src/tool',
+  },
 });

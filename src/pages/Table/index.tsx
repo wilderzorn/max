@@ -1,5 +1,5 @@
 import { AutoSizer, MultiGrid, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
-import { useStaticState, useTRState } from '@/utils/trHooks.jsx';
+import { useStaticState, useTRState } from '#/utils/trHooks.jsx';
 import { useEffect, useRef } from 'react';
 import { columns, dataList, columnsRatio } from './helper';
 import { Checkbox } from 'antd';

@@ -3,12 +3,11 @@ import { trim } from '@/utils/format';
 import { useModel } from '@umijs/max';
 import styles from './index.less';
 import React from 'react';
-import { Button, DatePicker, Form, Segmented, TreeSelect, Spin, Empty, Space, Input } from 'antd';
-import { useTRState } from '@/utils/trHooks.jsx';
+import { Button, DatePicker, Form, Segmented, TreeSelect, Spin, Empty,  Input } from 'antd';
+import { useTRState } from '#/utils/trHooks.jsx';
 import type { Moment } from 'moment';
 const { RangePicker } = DatePicker;
 type RangeValue = [Moment | null, Moment | null] | null;
-import { filterList } from './helper';
 
 const HomePage: React.FC = () => {
   const [form] = Form.useForm();
@@ -26,8 +25,6 @@ const HomePage: React.FC = () => {
   }, []);
 
   const onFeach = () => {
-    const selectPersonList = Array.from(new Set(filterList.map((item) => item.personId)));
-    // console.log(selectPersonList, 'selectPersonList');
     setState({ loading: true });
     setTimeout(() => {
       setState({

@@ -1,10 +1,10 @@
 import { ProLayout } from '@ant-design/pro-components';
-import { useRef, useEffect, Fragment } from 'react';
+import { useRef, useEffect } from 'react';
 import { Outlet, useModel, history } from '@umijs/max';
 import type { MenuDataItem } from '@ant-design/pro-components';
 import { Button, theme, Switch, ColorPicker, Flex } from 'antd';
-import { setAuthorization } from '@/utils/authority';
-import { useTRState, useStaticState } from '@/utils/trHooks.jsx';
+import { setAuthorization } from '#/utils/authority';
+import { useTRState, useStaticState } from '#/utils/trHooks.jsx';
 import { useExternal } from 'ahooks';
 import { ThemeProvider } from 'antd-style';
 import styles from './index.less';
@@ -136,7 +136,7 @@ export default () => {
           </a>
         )}
         logo={logo}
-        menuFooterRender={({ collapsed }) => {
+        menuFooterRender={({ collapsed }: any) => {
           return (
             <Flex
               {...(collapsed ? { vertical: true } : { horizontal: true, justify: 'space-around' })}

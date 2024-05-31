@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from '@umijs/max';
-import { getAuthorization } from '@/utils/authority';
+import { getAuthorization } from '#/utils/authority';
 
 const SecurityLayout = () => {
   const token = getAuthorization();
