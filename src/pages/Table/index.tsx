@@ -4,9 +4,9 @@ import { useEffect, useRef } from 'react';
 import { columns, dataList, columnsRatio } from './helper';
 import { Checkbox } from 'antd';
 import styles from './index.less';
-import PageLoading from '@/components/PageLoading';
 import cls from 'classnames';
 import { useModel } from '@umijs/max';
+import PageLoading from '#/components/PageLoading';
 
 const Table = () => {
   const { global } = useModel('global');
@@ -46,7 +46,9 @@ const Table = () => {
     const { nw, nu } = columnsRatio(columns);
     staticState.allRatio = nu;
     staticState.allWidth = nw;
-    setState({ loading: false });
+    setTimeout(() => {
+      setState({ loading: false });
+    }, 3000);
   };
 
   const cellRenderer = ({ columnIndex, key, rowIndex, parent, style }) => {
