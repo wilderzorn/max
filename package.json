@@ -17,10 +17,8 @@
     "setup": "max setup",
     "start": "npm run dev"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,md}": [
