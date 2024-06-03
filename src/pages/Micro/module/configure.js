@@ -11,4 +11,4 @@ export default {
     isSingular: true,
     isSandbox: false,
   },
-}
+};

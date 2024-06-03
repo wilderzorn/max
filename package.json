@@ -10,12 +10,18 @@
     "dev": "cross-env CLIENT_ENV=dev max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "precommit": "lint-staged",
     "prepare": "husky install",
     "preview": "max preview",
     "setup": "max setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "lint": "max setup && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "precommit:fix": "npm run lint:fix && npm run prettier && npm run lint:prettier && npm run lint:style",
+    "prettier": "prettier -c --write \"src/**/*\""
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
