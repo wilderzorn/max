@@ -44,34 +44,9 @@ export default defineConfig({
   },
   inlineLimit: 3000, // 配置图片文件是否走 base64 编译的阈值。默认是 10000 字节，少于他会被编译为 base64 编码，否则会生成单独的文件。
   //设置哪些模块不打包，转而通过 <script> 或其他方式引入，通常需要搭配 headScripts 配置使用。
-  // externals: IS_PRODUCTION
-  //   ? {
-  //       jspdf: 'jspdf',
-  //       react: 'React',
-  //       antd: 'antd',
-  //       'react-dom': 'ReactDOM',
-  //       echarts: 'echarts',
-  //     }
-  //   : {
-  //       echarts: 'echarts',
-  //     },
-  // scripts: IS_PRODUCTION
-  //   ? [
-  //       'https://static-pre.gw-greenenergy.com/react.production.min.js',
-  //       'https://static-pre.gw-greenenergy.com/react-dom.production.min.js',
-  //       'https://static-pre.gw-greenenergy.com/react-router-dom.min.js',
-  //       'https://static-pre.gw-greenenergy.com/antd.min.js',
-  //       'https://static-pre.gw-greenenergy.com/echarts.min.js',
-  //     ]
-  //   : ['https://static-pre.gw-greenenergy.com/echarts.min.js'],
   ...cig,
   chainWebpack: webpackPlugin,
-  plugins: [
-    // '@umijs/plugins/dist/initial-state',
-    // '@umijs/plugins/dist/model',
-    // '@umijs/plugins/dist/request',
-  ],
-
+  plugins: [],
   dva: {},
   qiankun: MICRO_CIG,
   headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
