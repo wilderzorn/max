@@ -1,11 +1,12 @@
 import React from 'react';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input, Carousel, Image } from 'antd';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import styles from './index.less';
 import { setAuthorization } from '#/utils/authority';
 import { history } from '@umijs/max';
-import os3 from '@/assets/user/CachedImage_OS3.jpg';
-import os4 from '@/assets/user/CachedImage_OS4.jpg';
+import Motion from './Motion';
+import { onLogin } from '@/services/user.js';
+import { useTRState } from '#/utils/trHooks.jsx';
 
 type FieldType = {
   username?: string;
@@ -14,32 +15,35 @@ type FieldType = {
 };
 
 const Login: React.FC = () => {
-  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    const { remember } = values;
-    if (remember) {
-      setAuthorization(`${new Date().getTime()}`);
+  const [state, setState] = useTRState({
+    loading: false,
+  });
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    setState({ loading: true });
+    const res = await onLogin({
+      username: values.username,
+      password: values.password,
+    });
+    setState({ loading: false });
+    if (res.statusCode === '1000') {
+      message.success('登录成功');
+      setAuthorization(res.token);
+      history.push('/');
+    } else {
+      message.error(res?.message ?? '登录失败');
     }
-    history.push('/');
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.container_imgs}>
-        <Carousel autoplay>
-          <div>
-            <Image preview={false} src={os3} height={595} width={500} />
-          </div>
-          <div>
-            <Image preview={false} src={os4} height={595} width={500} />
-          </div>
-        </Carousel>
-      </div>
+      <Motion />
       <div className={styles.container_form}>
+        <h1 style={{ textAlign: 'center' }}>登陆</h1>
         <Form
           name="basic"
-          labelCol={{ span: 6 }}
+          labelCol={{ span: 4 }}
           wrapperCol={{ span: 28 }}
-          style={{ maxWidth: 600 }}
+          style={{ width: '100%' }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
@@ -51,7 +55,6 @@ const Login: React.FC = () => {
           >
             <Input />
           </Form.Item>
-
           <Form.Item<FieldType>
             label="密码"
             name="password"
@@ -59,7 +62,6 @@ const Login: React.FC = () => {
           >
             <Input.Password />
           </Form.Item>
-
           <Form.Item<FieldType>
             name="remember"
             valuePropName="checked"
@@ -67,9 +69,8 @@ const Login: React.FC = () => {
           >
             <Checkbox>记住我</Checkbox>
           </Form.Item>
-
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={state.loading}>
               登陆
             </Button>
           </Form.Item>

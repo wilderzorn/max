@@ -17,3 +17,4 @@ yarn-error.log
 /public
 .DS_Store
 /config/routes.ts
+.eslintcache

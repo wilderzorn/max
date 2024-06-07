@@ -1,6 +1,4 @@
 const { NODE_ENV } = process.env;
-const { ModuleFederationPlugin } = require('webpack').container;
-import { resolve } from 'path';
 
 export const webpackPlugin = (config) => {
   if (NODE_ENV === 'production') {

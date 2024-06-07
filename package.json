@@ -14,7 +14,7 @@
     "prepare": "husky install",
     "preview": "max preview",
     "setup": "max setup",
-    "start": "npm run dev",
+    "start": "cross-env CLIENT_ENV=pre max dev",
     "lint": "max setup && npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
@@ -44,6 +44,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "rc-notification": "^5.5.0",
+    "rc-tween-one": "^3.0.6",
     "react-virtualized": "^9.22.5"
   },
   "devDependencies": {

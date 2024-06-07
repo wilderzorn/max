@@ -10,6 +10,7 @@ import { ThemeProvider } from 'antd-style';
 import styles from './index.less';
 import { PoweroffOutlined } from '@ant-design/icons';
 import logo from '../../public/logo.png';
+import emitter from '#/utils/events';
 // 存放固定的静态资源，如存放 public/image.png ，则开发时可以通过 /image.png 访问到，构建后会被拷贝到输出文件夹。
 // import lightCss from './theme/light.css';
 // import darkCss from './theme/dark.css';
@@ -61,6 +62,7 @@ export default () => {
   useEffect(() => {
     if (staticState.collapsedTimer) return;
     staticState.collapsedTimer = setTimeout(() => {
+      emitter.emit('__onChangeMnue__', global.collapsed);
       clearTimeout(staticState.collapsedTimer);
       staticState.collapsedTimer = null;
     }, 200);
@@ -110,6 +112,10 @@ export default () => {
                 path: '/table',
               },
               {
+                name: '历史数据查询',
+                path: '/historyDataQuery',
+              },
+              {
                 name: '子项目',
                 path: '/childWeb',
               },
@@ -139,7 +145,7 @@ export default () => {
         menuFooterRender={({ collapsed }: any) => {
           return (
             <Flex
-              {...(collapsed ? { vertical: true } : { horizontal: true, justify: 'space-around' })}
+              {...(collapsed ? { vertical: true } : { vertical: false, justify: 'space-around' })}
               gap="small"
               style={{ width: '100%' }}
               align="center"

@@ -34,9 +34,14 @@ export default [
             component: './Access',
           },
           {
-            name: ' CRUD 示例',
+            name: 'CRUD 示例',
             path: '/table',
             component: './Table',
+          },
+          {
+            name: '历史数据查询',
+            path: '/historyDataQuery',
+            component: './HistoryDataQuery',
           },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控

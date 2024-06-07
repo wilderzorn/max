@@ -4,6 +4,7 @@ import routes from './routes';
 import webpackPlugin from './webpackPlugin';
 const { NODE_ENV, CLIENT_ENV, TERMINAL_ENV } = process.env;
 import { MICRO_CIG } from './micro';
+import proxy from './proxy';
 
 const DQ_BASE = '/web/';
 const IS_PRODUCTION = NODE_ENV === 'production';
@@ -18,7 +19,6 @@ export default defineConfig({
   // access 插件依赖 initial State 所以需要同时开启
   access: {},
   initialState: {},
-  request: {},
   fastRefresh: true,
   conventionLayout: false, //src/layouts/index.[tsx|vue|jsx|js] 为约定式布局，默认开启
   routes,
@@ -46,14 +46,24 @@ export default defineConfig({
   //设置哪些模块不打包，转而通过 <script> 或其他方式引入，通常需要搭配 headScripts 配置使用。
   ...cig,
   chainWebpack: webpackPlugin,
-  plugins: [],
+  // '@umijs/plugins/dist/initial-state',
+  // '@umijs/plugins/dist/model',
+  request: {},
+  // plugins: ['@umijs/plugins/dist/request'],
   dva: {},
   qiankun: MICRO_CIG,
-  headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
   mfsu: {
     strategy: 'normal',
   },
   alias: {
     '#': '/src/tool',
   },
+  //配置 <head> 中的额外 script。
+  headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
+  // 配置 <body> 中额外的 script 标签。
+  scripts: ['https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js'],
+  externals: {
+    echarts: 'echarts',
+  },
+  proxy,
 });
