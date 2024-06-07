@@ -2,6 +2,9 @@
   "private": true,
   "author": "wilderzorn <wilderzorn@163.com>",
   "name": "maxweb",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "analyze": "cross-env ANALYZE=1 max build",
     "build": "cross-env UMI_ENV=release max build",
