@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
-npx --no-install commitlint --edit "$1"
+PATH=$PATH:/usr/local/bin:/usr/local/sbin
+npx --no-install commitlint --edit $1

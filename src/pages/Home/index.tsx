@@ -17,6 +17,7 @@ const HomePage: React.FC = () => {
     dates: null,
     treeData: [],
     loading: false,
+    list: [1, 2, 3, 4, 5, 6, 7],
   });
   const [dates, setDates] = React.useState<RangeValue>(null);
 
@@ -31,84 +32,42 @@ const HomePage: React.FC = () => {
         loading: false,
         treeData: [
           {
-            title: '全选',
-            value: 'all',
+            title: '分组1',
+            value: 'group1',
             children: [
               {
-                value: 46,
+                value: 1,
                 title: '钉钉群',
               },
               {
-                value: 43,
+                value: 2,
                 title: '测试钉钉群',
               },
               {
-                value: 42,
+                value: 3,
                 title: 'xvxfzvcz',
               },
+            ],
+          },
+          {
+            title: '分组2',
+            value: 'group2',
+            children: [
               {
-                value: 41,
+                value: 4,
                 title: '5354646',
               },
               {
-                value: 39,
+                value: 5,
                 title: '4321',
               },
               {
-                value: 38,
-                title: '012',
-              },
-              {
-                value: 37,
+                value: 6,
                 title: '789',
               },
               {
-                value: 36,
+                value: 7,
                 title: '456',
-              },
-              {
-                value: 34,
-                title: '123',
-              },
-              {
-                value: 33,
-                title: '45体育局还',
-              },
-              {
-                value: 32,
-                title: '45体育局还给他烦人的',
-              },
-              {
-                value: 31,
-                title: '12',
-              },
-              {
-                value: 30,
-                title: 'ASDASD',
-              },
-              {
-                value: 28,
-                title: '213',
-              },
-              {
-                value: 27,
-                title: '13134',
-              },
-              {
-                value: 26,
-                title: '资源保障部分管领导1',
-              },
-              {
-                value: 19,
-                title: '3发',
-              },
-              {
-                value: 21,
-                title: '33发',
-              },
-              {
-                value: 20,
-                title: '2发',
               },
             ],
           },
@@ -142,7 +101,11 @@ const HomePage: React.FC = () => {
     const valuse = await form.validateFields();
     // console.log(valuse, '-valuse------');
   };
-
+  const customSort = (a, b) => {
+    const indexA = state.list.indexOf(a);
+    const indexB = state.list.indexOf(b);
+    return indexA - indexB;
+  };
   return (
     <div className={styles.container}>
       <Guide name={trim(global.name)} />
@@ -168,7 +131,7 @@ const HomePage: React.FC = () => {
         <Form.Item
           label="DatePicker"
           name="datePicker"
-          rules={[{ required: true, message: 'Please input your datePicker!' }]}
+          rules={[{ required: false, message: 'Please input your datePicker!' }]}
         >
           <RangePicker
             // disabled={_timeRange !== 'soonMy'}
@@ -202,16 +165,22 @@ const HomePage: React.FC = () => {
                 )}
               </React.Fragment>
             }
+            onChange={(value) => {
+              const order = (value || []).sort(customSort);
+              form.setFieldsValue({
+                dingdingInfos: order,
+              });
+            }}
           />
         </Form.Item>
-        <Form.Item label="公告内容" required={true}>
+        <Form.Item label="公告内容" required={false}>
           <div style={{ display: 'flex' }}>
             <Form.Item
               name="content"
               noStyle
               rules={[
                 {
-                  required: true,
+                  required: false,
                   whitespace: true,
                   message: '请填写公告内容',
                 },

@@ -81,6 +81,7 @@ export default () => {
       theme={(appearance) => {
         return {
           token: {
+            borderRadius: 5,
             colorPrimary: global?.themeColor ?? '#1677ff',
           },
           algorithm: appearance === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
@@ -102,6 +103,10 @@ export default () => {
               {
                 path: '/home',
                 name: '首页',
+              },
+              {
+                name: '中间件',
+                path: '/middleware',
               },
               {
                 name: '权限演示',

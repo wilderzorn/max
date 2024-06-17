@@ -12,7 +12,7 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 const cig: any = {};
 
 export default defineConfig({
-  base: `${DQ_BASE}`, // 在非根目录下部署 umi 项目时，你可以使用 base 配置
+  base: IS_PRODUCTION ? `${DQ_BASE}` : '/', // 在非根目录下部署 umi 项目时，你可以使用 base 配置
   antd: {},
   clickToComponent: {}, // 点击组件跳转至编辑器源码位置
   model: {},
@@ -25,9 +25,11 @@ export default defineConfig({
   npmClient: 'npm',
   outputPath: `/web`, // 打包输出路径。
   publicPath: IS_PRODUCTION ? `${DQ_BASE}` : '/',
+  // publicPath: `${DQ_BASE}`,
   hash: true,
   history: {
-    type: 'browser',
+    // type: 'browser',
+    type: 'hash',
   },
   mountElementId: 'root-master', // 配置 react 组件树渲染到 HTML 中的元素 id。
   // theme: { 'primary-color': defaultSettings.primaryColor},
@@ -60,10 +62,12 @@ export default defineConfig({
   },
   //配置 <head> 中的额外 script。
   headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
+  // headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
   // 配置 <body> 中额外的 script 标签。
   scripts: ['https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js'],
   externals: {
     echarts: 'echarts',
   },
   proxy,
+  styledComponents: {}, // @umijs/max 内置了 styled-components 样式方案。配置开启。
 });

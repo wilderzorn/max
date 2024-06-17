@@ -29,6 +29,11 @@ export default [
             component: './Home',
           },
           {
+            name: '中间件',
+            path: '/middleware',
+            component: './Middleware',
+          },
+          {
             name: '权限演示',
             path: '/access',
             component: './Access',
