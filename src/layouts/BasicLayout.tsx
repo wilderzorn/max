@@ -1,6 +1,6 @@
 import { ProLayout } from '@ant-design/pro-components';
 import { useRef, useEffect } from 'react';
-import { Outlet, useModel, history } from '@umijs/max';
+import { Outlet, useModel, history, useLocation } from '@umijs/max';
 import type { MenuDataItem } from '@ant-design/pro-components';
 import { Button, theme, Switch, ColorPicker, Flex } from 'antd';
 import { setAuthorization } from '#/utils/authority';
@@ -36,6 +36,7 @@ const THEME_PATH_MAP = {
 };
 
 export default () => {
+  const location = useLocation();
   const actionRef = useRef();
   const { setGlobal, global } = useModel('global');
   const staticState = useStaticState({

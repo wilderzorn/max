@@ -55,6 +55,8 @@
   ---9: #bf5af2;
   ---10: #ac8e68;
   /* 列表 */
-  --table-row-bg1: #3a3a3a;
-  --table-row-bg2: #313131;
+  --table-row-bg1: #222629;
+  --table-row-bg2: #25292c;
+  --table-border-color: #5a5a5a4a;
+  --table-hover-bg: #24445b;
 }

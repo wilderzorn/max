@@ -4,9 +4,10 @@ import styles from './index.less';
 import { useModel } from '@umijs/max';
 import PageLoading from '#/components/PageLoading';
 import Virtual from './virtual';
-import TrTable from './trTable';
+import { columns, dataList } from './helper';
+import { Table } from 'antd';
 
-const Table = () => {
+const TRTable = () => {
   const { global } = useModel('global');
   const staticState = useStaticState({
     timer: null,
@@ -33,15 +34,27 @@ const Table = () => {
   const onInitMethod = () => {
     setTimeout(() => {
       setState({ loading: false });
-    }, 2000);
+    }, 1000);
   };
 
   if (state.loading) return <PageLoading />;
   return (
     <div className={styles.container}>
       <Virtual />
-      <TrTable />
+      <div className={styles.table}>
+        <Table
+          bordered={true}
+          virtual={true}
+          columns={columns}
+          rowKey="id"
+          dataSource={dataList}
+          pagination={false}
+          scroll={{
+            y: 918,
+          }}
+        />
+      </div>
     </div>
   );
 };
-export default Table;
+export default TRTable;

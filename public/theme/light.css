@@ -57,4 +57,6 @@
   /* 列表 */
   --table-row-bg1: #efefef;
   --table-row-bg2: #f3f3f3;
+  --table-border-color: #747474;
+  --table-hover-bg: #e6f3ff;
 }

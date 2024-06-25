@@ -179,22 +179,79 @@ const option = {
 import React from 'react';
 import styles from './index.less';
 import { useResize, useStaticState } from '#/utils/trHooks';
+import { useSize, useFullscreen } from 'ahooks';
+import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
+
+// 将UI大小定义为常量，以便于维护
+const DEFAULT_UI_SIZE = { width: 1920, height: 1080 };
 
 const HistoryDataQuery = () => {
+  const [scale, setScale] = React.useState(1); // 页面缩放
+  const [pageHeight, setPageHeight] = React.useState(0);
   const radarRef = React.useRef();
+  const ref = React.useRef();
+  const size = useSize(ref);
+  const [isFullscreen, { enterFullscreen, exitFullscreen }] = useFullscreen(ref);
   const staticState = useStaticState({
     radarRef: null,
   });
+  const toggleFullscreen = () => {
+    isFullscreen ? exitFullscreen() : enterFullscreen();
+  };
 
+  // 初始化echarts实例和设置选项的副作用现在依赖于size，确保了size变化时的正确处理
   React.useEffect(() => {
-    staticState.radarRef = echarts?.init?.(radarRef.current);
-    staticState.radarRef?.setOption?.(option);
-  }, []);
+    if (!radarRef.current) return;
+    const echartsInstance = echarts.init(radarRef.current);
+    staticState.radarRef = echartsInstance;
+    echartsInstance.setOption(option);
+    return () => {
+      echartsInstance.dispose(); // 添加清理逻辑，防止内存泄漏
+    };
+  }, [size?.width, size?.height]);
+
+  // 根据size调整页面大小
+  React.useEffect(() => {
+    pageResize();
+  }, [size?.width, size?.height]);
+
+  const pageResize = () => {
+    if (!size || size.width <= 0 || size.height <= 0) return; // 添加边界检查
+    const _scale = Math.max(size.width / DEFAULT_UI_SIZE.width, 0.1); // 避免除以0或负数
+    if (_scale !== scale) {
+      setScale(_scale);
+    }
+    setPageHeight(Math.max(size.height / _scale, 0));
+  };
 
   useResize(() => {
-    staticState.radarRef?.resize();
+    onResize();
   });
 
-  return <div ref={radarRef} className={styles.container} />;
+  const onResize = React.useCallback(() => {
+    if (staticState.radarRef) {
+      staticState.radarRef.resize();
+    }
+  }, [staticState.radarRef]);
+
+  if (!size) return <div ref={ref} className={styles.container} />; // 防止在size未获取到时渲染，可能导致的布局问题
+
+  return (
+    <div ref={ref} className={styles.container}>
+      <div
+        className={styles.page_inner}
+        style={{
+          transform: `scale(${scale})`,
+          width: DEFAULT_UI_SIZE.width,
+          height: pageHeight,
+        }}
+      >
+        <div ref={radarRef} style={{ width: '100%', height: '100%' }} />
+      </div>
+      <div className={styles.full} onClick={toggleFullscreen}>
+        {isFullscreen ? <ShrinkOutlined /> : <ArrowsAltOutlined />}
+      </div>
+    </div>
+  );
 };
 export default HistoryDataQuery;

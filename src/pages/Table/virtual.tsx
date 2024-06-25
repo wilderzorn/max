@@ -1,4 +1,3 @@
-import { AutoSizer, MultiGrid, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
 import { useStaticState, useTRState } from '#/utils/trHooks.jsx';
 import { useEffect, useRef } from 'react';
 import { columns, dataList, columnsRatio } from './helper';
@@ -6,6 +5,10 @@ import { Checkbox } from 'antd';
 import styles from './index.less';
 import cls from 'classnames';
 import { useModel } from '@umijs/max';
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import MultiGrid from 'react-virtualized/dist/commonjs/MultiGrid';
+import CellMeasurer from 'react-virtualized/dist/commonjs/CellMeasurer';
+import CellMeasurerCache from 'react-virtualized/dist/commonjs/CellMeasurer/CellMeasurerCache';
 
 const Virtual = () => {
   const { global } = useModel('global');

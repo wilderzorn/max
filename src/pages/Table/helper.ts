@@ -20,23 +20,27 @@ export const columns = [
     dataIndex: 'check',
     title: '123',
     width: 60,
+    ellipsis: true,
   },
   {
     dataIndex: 'name',
     title: '名称',
     filter: true,
     flex: 1,
+    ellipsis: true,
   },
   {
     dataIndex: 'description',
     title: '描述',
     filter: true,
     flex: 1,
+    ellipsis: true,
   },
   {
     dataIndex: 'btns',
     title: '操作',
     width: 200,
+    ellipsis: true,
     btns: [
       {
         label: '查看',
