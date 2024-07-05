@@ -5,8 +5,8 @@ import styles from './index.less';
 import { setAuthorization } from '#/utils/authority';
 import { history } from '@umijs/max';
 import Motion from './Motion';
-import { onLogin } from '@/services/user.js';
-import { useTRState } from '#/utils/trHooks.jsx';
+import { onLogin } from '@/services/user';
+import { useTRState } from '#/utils/trHooks';
 
 type FieldType = {
   username?: string;

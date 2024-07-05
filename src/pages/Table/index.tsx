@@ -1,4 +1,4 @@
-import { useStaticState, useTRState } from '#/utils/trHooks.jsx';
+import { useStaticState, useTRState } from '#/utils/trHooks';
 import { useEffect } from 'react';
 import styles from './index.less';
 import { useModel } from '@umijs/max';
@@ -6,6 +6,7 @@ import PageLoading from '#/components/PageLoading';
 import Virtual from './virtual';
 import { columns, dataList } from './helper';
 import { Table } from 'antd';
+import React from 'react';
 
 const TRTable = () => {
   const { global } = useModel('global');

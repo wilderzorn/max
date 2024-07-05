@@ -4,10 +4,10 @@ import { useModel } from '@umijs/max';
 import styles from './index.less';
 import React from 'react';
 import { Button, DatePicker, Form, Segmented, TreeSelect, Spin, Empty, Input } from 'antd';
-import { useTRState } from '#/utils/trHooks.jsx';
-import type { Moment } from 'moment';
+import { useTRState } from '#/utils/trHooks';
+import type { Dayjs } from 'dayjs';
 const { RangePicker } = DatePicker;
-type RangeValue = [Moment | null, Moment | null] | null;
+type RangeValue = [Dayjs | null, Dayjs | null] | null;
 
 const HomePage: React.FC = () => {
   const [form] = Form.useForm();
@@ -84,7 +84,7 @@ const HomePage: React.FC = () => {
       return false;
     }
     const tooLate = dates[0] || dates[1];
-    return current.diff(tooLate, 'days') > 7 || (tooLate as Moment).diff(current, 'days') > 7;
+    return current.diff(tooLate, 'days') > 7 || (tooLate as Dayjs).diff(current, 'days') > 7;
   };
 
   const onOpenChange = (open) => {

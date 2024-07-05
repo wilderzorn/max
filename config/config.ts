@@ -59,6 +59,7 @@ export default defineConfig({
   },
   alias: {
     '#': '/src/tool',
+    '@': '/src',
   },
   //配置 <head> 中的额外 script。
   headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],

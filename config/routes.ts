@@ -48,6 +48,11 @@ export default [
             path: '/historyDataQuery',
             component: './HistoryDataQuery',
           },
+           {
+            name: '策略配置',
+            path: '/strategy',
+            component: './Strategy',
+          },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控
           {
