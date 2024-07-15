@@ -10,7 +10,7 @@ const TR_PROXY = function () {
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
-  }
+  };
 };
 
 export default TR_PROXY();

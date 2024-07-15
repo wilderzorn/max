@@ -1,20 +1,25 @@
-import { ProLayout } from '@ant-design/pro-components';
-import React, { useRef, useEffect } from 'react';
-import { Outlet, useModel, history, useLocation } from '@umijs/max';
-import type { MenuDataItem } from '@ant-design/pro-components';
-import { Button, Switch, ColorPicker, Flex } from 'antd';
+import abortableDelay from '#/utils/abortableDelay';
+import applyTheme from '#/utils/applyTheme';
 import { setAuthorization } from '#/utils/authority';
-import { useTRState, useStaticState } from '#/utils/trHooks';
-import { useExternal } from 'ahooks';
-import { ThemeProvider } from 'antd-style';
-import styles from './index.less';
+import emitter from '#/utils/emitter.js';
+import { useStaticState, useTRState } from '#/utils/trHooks';
 import { PoweroffOutlined } from '@ant-design/icons';
+import type { MenuDataItem } from '@ant-design/pro-components';
+import { ProLayout } from '@ant-design/pro-components';
+import {
+  Outlet,
+  history,
+  setLocale,
+  useIntl,
+  useLocation,
+  useModel,
+} from '@umijs/max';
+import { useExternal } from 'ahooks';
+import { Button, ColorPicker, Divider, Flex, Switch } from 'antd';
+import { ThemeProvider } from 'antd-style';
+import React, { Fragment, useEffect, useRef } from 'react';
 import logo from '../../public/logo.png';
-import emitter from '#/utils/events.js';
-import waitTime from '../utils/waitTime';
-// 存放固定的静态资源，如存放 public/image.png ，则开发时可以通过 /image.png 访问到，构建后会被拷贝到输出文件夹。
-// import lightCss from './theme/light.css';
-// import darkCss from './theme/dark.css';
+import styles from './index.less';
 
 const publicPath = `${(window as any)?.publicPath ?? '/'}`;
 const THEME_PATH = {
@@ -29,6 +34,7 @@ const THEME_PATH_MAP = {
 };
 
 export default () => {
+  const intl = useIntl();
   const location = useLocation();
   const actionRef = useRef();
   const { setGlobal, global } = useModel('global');
@@ -71,35 +77,11 @@ export default () => {
   return (
     <ThemeProvider
       appearance={global.theme}
-      theme={() => {
-        return {
-          token: {
-            borderRadius: 5,
-            colorPrimary: global?.themeColor ?? '#1677ff',
-          },
-          components: {
-            Table: { algorithm: true, padding: 6 },
-            Select: {
-              optionSelectedBg: 'var(--base)',
-              selectorBg: 'transparent',
-            },
-            Input: {
-              colorBgContainer: 'transparent',
-            },
-            InputNumber: {
-              colorBgContainer: 'transparent',
-            },
-            DatePicker: {
-              colorBgContainer: 'transparent',
-            },
-            Checkbox: {
-              colorBgContainer: 'transparent',
-            },
-          },
-        };
-      }}
+      theme={() => applyTheme(global.themeOptions)}
     >
       <ProLayout
+        siderWidth={200} // 菜单收起宽度是无法自定义
+        locale={global.locale}
         pure={false}
         breakpoint={false}
         collapsed={global.collapsed}
@@ -107,40 +89,46 @@ export default () => {
         actionRef={actionRef}
         suppressSiderWhenMenuEmpty={false} //在菜单为空时隐藏 Sider
         className={styles.layout}
+        formatMessage={(data) =>
+          intl.formatMessage({
+            id: `${data.id}`,
+          })
+        }
         menu={{
+          locale: true,
           request: async () => {
-            await waitTime(1000);
+            await abortableDelay(1000);
             return [
               {
+                name: 'home',
                 path: '/home',
-                name: '首页',
               },
               {
-                name: '中间件',
+                name: 'middleware',
                 path: '/middleware',
               },
               {
-                name: '策略配置',
+                name: 'strategy',
                 path: '/strategy',
               },
               {
-                name: '权限演示',
+                name: 'access',
                 path: '/access',
               },
               {
-                name: '虚拟列表',
+                name: 'table',
                 path: '/table',
               },
               {
-                name: '历史数据查询',
+                name: 'historyDataQuery',
                 path: '/historyDataQuery',
               },
               {
-                name: '子项目',
+                name: 'childWeb',
                 path: '/childWeb',
               },
               {
-                name: '过渡',
+                name: 'transition',
                 path: '/transition',
               },
             ];
@@ -148,46 +136,70 @@ export default () => {
         }}
         location={{ pathname: global.pathname }}
         contentStyle={{ padding: '0' }}
-        menuItemRender={(item: MenuDataItem, dom) => (
-          <a
-            onClick={() => {
-              history.push(item.path as string);
-              setGlobal({ pathname: item.path });
-            }}
-          >
-            {dom}
-          </a>
-        )}
+        menuItemRender={(item: MenuDataItem, dom) => {
+          return (
+            <a
+              onClick={() => {
+                history.push(item.path as string);
+                setGlobal({ pathname: item.path });
+              }}
+            >
+              {dom}
+            </a>
+          );
+        }}
         logo={logo}
         menuFooterRender={({ collapsed }: any) => {
           return (
-            <Flex
-              {...(collapsed ? { vertical: true } : { vertical: false, justify: 'space-around' })}
-              gap="small"
-              style={{ width: '100%' }}
-              align="center"
-            >
-              <Switch
-                checkedChildren="黑"
-                unCheckedChildren="白"
-                value={global.theme === 'dark'}
-                onChange={(checked) => setGlobal({ theme: checked ? 'dark' : 'light' })}
-              />
-              <ColorPicker
-                value={global.themeColor}
-                onChangeComplete={(color) => {
-                  setGlobal({ themeColor: color.toHexString() });
-                }}
-              />
-              <Button
-                type="primary"
-                icon={<PoweroffOutlined />}
-                onClick={() => {
-                  setAuthorization();
-                  history.push('/user');
-                }}
-              />
-            </Flex>
+            <Fragment>
+              <Divider />
+              <Flex
+                {...(collapsed
+                  ? { vertical: true }
+                  : { vertical: false, justify: 'space-around' })}
+                gap="small"
+                style={{ width: '100%' }}
+                align="center"
+              >
+                <Switch
+                  checkedChildren="中"
+                  unCheckedChildren="US"
+                  value={global.locale === 'zh-CN'}
+                  onChange={(checked) => {
+                    const val = checked ? 'zh-CN' : 'en-US';
+                    setLocale(val, false);
+                    setGlobal({ locale: val });
+                  }}
+                />
+                <Switch
+                  checkedChildren="黑"
+                  unCheckedChildren="白"
+                  value={global.theme === 'dark'}
+                  onChange={(checked) =>
+                    setGlobal({ theme: checked ? 'dark' : 'light' })
+                  }
+                />
+                <ColorPicker
+                  value={global.themeOptions.colorPrimary}
+                  onChangeComplete={(color) => {
+                    setGlobal({
+                      themeOptions: {
+                        ...global.themeOptions,
+                        colorPrimary: color.toHexString(),
+                      },
+                    });
+                  }}
+                />
+                <Button
+                  type="primary"
+                  icon={<PoweroffOutlined />}
+                  onClick={() => {
+                    setAuthorization();
+                    history.push('/user');
+                  }}
+                />
+              </Flex>
+            </Fragment>
           );
         }}
       >

@@ -1,6 +1,6 @@
 import TweenOne from 'rc-tween-one';
-import './index.less';
 import React from 'react';
+import './index.less';
 
 class GridLayout {
   constructor(rect, width, height) {
@@ -31,7 +31,8 @@ class GridLayout {
     return gridArray;
   };
 
-  hasCollisions = (t) => this.getCells(t).some((e) => e.some((v) => this.collides(t, v)));
+  hasCollisions = (t) =>
+    this.getCells(t).some((e) => e.some((v) => this.collides(t, v)));
 
   collides = (t, a) => {
     if (t === a) {
@@ -76,11 +77,13 @@ const getPointPos = (width, height, length) => {
   return posArray;
 };
 
-const getDistance = (t, a) => Math.sqrt((t.x - a.x) * (t.x - a.x) + (t.y - a.y) * (t.y - a.y));
+const getDistance = (t, a) =>
+  Math.sqrt((t.x - a.x) * (t.x - a.x) + (t.y - a.y) * (t.y - a.y));
 
 class Point extends React.PureComponent {
   render() {
-    const { tx, ty, x, y, opacity, backgroundColor, radius, ...props } = this.props;
+    const { tx, ty, x, y, opacity, backgroundColor, radius, ...props } =
+      this.props;
     let transform;
     let zIndex = 0;
     let animation = {
@@ -94,7 +97,9 @@ class Point extends React.PureComponent {
       if (tx !== x && ty !== y) {
         const distance = getDistance({ x, y }, { x: tx, y: ty });
         const g = Math.sqrt(2000000 / (0.1 * distance * distance));
-        transform = `translate(${(g * (x - tx)) / distance}px, ${(g * (y - ty)) / distance}px)`;
+        transform = `translate(${(g * (x - tx)) / distance}px, ${
+          (g * (y - ty)) / distance
+        }px)`;
       } else if (tx === x && ty === y) {
         transform = `scale(${80 / radius})`;
         animation = { y: 0, yoyo: false, repeat: 0, duration: 300 };
@@ -156,7 +161,9 @@ class LinkedAnimate extends React.Component {
         return {
           x,
           y,
-          distance: getDistance({ x: cX - boxRect.x, y: cY - boxRect.y }, { x, y }) - radius,
+          distance:
+            getDistance({ x: cX - boxRect.x, y: cY - boxRect.y }, { x, y }) -
+            radius,
         };
       })
       .reduce((a, b) => {
@@ -196,7 +203,13 @@ class LinkedAnimate extends React.Component {
           onMouseLeave={this.onMouseLeave}
         >
           {data.map((item, i) => (
-            <Point {...item} tx={tx} ty={ty} key={i.toString()} className={`${className}-block`} />
+            <Point
+              {...item}
+              tx={tx}
+              ty={ty}
+              key={i.toString()}
+              className={`${className}-block`}
+            />
           ))}
         </div>
       </div>

@@ -1,12 +1,12 @@
-import React from 'react';
+import { setAuthorization } from '#/utils/authority';
+import { useTRState } from '#/utils/trHooks';
+import { onLogin } from '@/services/user';
+import { FormattedMessage, history, useIntl } from '@umijs/max';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input, message } from 'antd';
-import styles from './index.less';
-import { setAuthorization } from '#/utils/authority';
-import { history } from '@umijs/max';
+import React from 'react';
 import Motion from './Motion';
-import { onLogin } from '@/services/user';
-import { useTRState } from '#/utils/trHooks';
+import styles from './index.less';
 
 type FieldType = {
   username?: string;
@@ -15,6 +15,7 @@ type FieldType = {
 };
 
 const Login: React.FC = () => {
+  const intl = useIntl();
   const [state, setState] = useTRState({
     loading: false,
   });
@@ -38,25 +39,28 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <Motion />
       <div className={styles.container_form}>
-        <h1 style={{ textAlign: 'center' }}>登陆</h1>
+        <h1 style={{ textAlign: 'center' }}>
+          {intl.formatMessage({
+            id: `login.login`,
+          })}
+        </h1>
         <Form
           name="basic"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 28 }}
+          layout="vertical"
           style={{ width: '100%' }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="账号"
+            label={<FormattedMessage id="login.username" />}
             name="username"
             rules={[{ required: true, message: '请输入账号!' }]}
           >
             <Input />
           </Form.Item>
           <Form.Item<FieldType>
-            label="密码"
+            label={<FormattedMessage id="login.password" />}
             name="password"
             rules={[{ required: true, message: '请输入密码!' }]}
           >
@@ -67,11 +71,13 @@ const Login: React.FC = () => {
             valuePropName="checked"
             wrapperCol={{ offset: 8, span: 16 }}
           >
-            <Checkbox>记住我</Checkbox>
+            <Checkbox>
+              <FormattedMessage id="login.remember" />
+            </Checkbox>
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" loading={state.loading}>
-              登陆
+              <FormattedMessage id="login.login" />
             </Button>
           </Form.Item>
         </Form>

@@ -1,12 +1,16 @@
 import { useStaticState, useTRState } from '#/utils/trHooks';
-import { useEffect, useRef } from 'react';
-import { columns, dataList, columnsRatio } from './helper';
-import { Checkbox } from 'antd';
-import styles from './index.less';
-import cls from 'classnames';
 import { useModel } from '@umijs/max';
-import { AutoSizer, MultiGrid, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
-import React from 'react';
+import { Checkbox } from 'antd';
+import cls from 'classnames';
+import React, { useEffect, useRef } from 'react';
+import {
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+  MultiGrid,
+} from 'react-virtualized';
+import { columns, columnsRatio, dataList } from './helper';
+import styles from './index.less';
 
 const Virtual = () => {
   const { global } = useModel('global');
@@ -194,7 +198,9 @@ const Virtual = () => {
                 }
                 const trWidth = Math.max(
                   Math.floor(
-                    ((width - staticState.allWidth - 10) / staticState.allRatio) * (cl.flex ?? 1),
+                    ((width - staticState.allWidth - 10) /
+                      staticState.allRatio) *
+                      (cl.flex ?? 1),
                   ),
                   val,
                 );

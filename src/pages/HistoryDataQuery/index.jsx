@@ -34,14 +34,14 @@ const category = [
   '检修',
 ];
 const lineData = [
-  18092, 20728, 24045, 28348, 32808, 36097, 39867, 44715, 48444, 50415, 56061, 62677, 59521, 67560,
-  18092, 20728, 24045, 28348, 32808, 36097, 39867, 44715, 48444, 50415, 36097, 39867, 44715, 48444,
-  50415, 50061, 32677, 49521, 32808,
+  18092, 20728, 24045, 28348, 32808, 36097, 39867, 44715, 48444, 50415, 56061,
+  62677, 59521, 67560, 18092, 20728, 24045, 28348, 32808, 36097, 39867, 44715,
+  48444, 50415, 36097, 39867, 44715, 48444, 50415, 50061, 32677, 49521, 32808,
 ];
 const barData = [
-  4600, 5000, 5500, 6500, 7500, 8500, 9900, 12500, 14000, 21500, 23200, 24450, 25250, 33300, 4600,
-  5000, 5500, 6500, 7500, 8500, 9900, 22500, 14000, 21500, 8500, 9900, 12500, 14000, 21500, 23200,
-  24450, 25250, 7500,
+  4600, 5000, 5500, 6500, 7500, 8500, 9900, 12500, 14000, 21500, 23200, 24450,
+  25250, 33300, 4600, 5000, 5500, 6500, 7500, 8500, 9900, 22500, 14000, 21500,
+  8500, 9900, 12500, 14000, 21500, 23200, 24450, 25250, 7500,
 ];
 const rateData = [];
 // 32808;
@@ -176,11 +176,11 @@ const option = {
     },
   ],
 };
+import { useResize, useStaticState } from '#/utils/trHooks';
+import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
+import { useFullscreen, useSize } from 'ahooks';
 import React from 'react';
 import styles from './index.less';
-import { useResize, useStaticState } from '#/utils/trHooks';
-import { useSize, useFullscreen } from 'ahooks';
-import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
 
 // 将UI大小定义为常量，以便于维护
 const DEFAULT_UI_SIZE = { width: 1920, height: 1080 };
@@ -191,7 +191,8 @@ const HistoryDataQuery = () => {
   const radarRef = React.useRef();
   const ref = React.useRef();
   const size = useSize(ref);
-  const [isFullscreen, { enterFullscreen, exitFullscreen }] = useFullscreen(ref);
+  const [isFullscreen, { enterFullscreen, exitFullscreen }] =
+    useFullscreen(ref);
   const staticState = useStaticState({
     radarRef: null,
   });

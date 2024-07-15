@@ -1,5 +1,5 @@
+import { history, useModel } from '@umijs/max';
 import { Button, Result } from 'antd';
-import { useModel, history } from '@umijs/max';
 
 const TREmpty = () => {
   const { setGlobal } = useModel('global');

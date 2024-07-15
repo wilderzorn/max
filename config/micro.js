@@ -11,4 +11,4 @@ export const MICRO_CIG = {
     ],
   },
   sandbox: { strictStyleIsolation: true }, // 开启沙箱,样式隔离
-}
+};

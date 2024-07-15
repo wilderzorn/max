@@ -1,18 +1,21 @@
 .container {
+  display: flex;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   padding: 20px;
-  display: flex;
+  overflow: hidden;
+
   .table {
-    background-color: var(--bg-main);
-    margin: 0 10px;
     flex: 1;
+    margin: 0 10px;
+    background-color: var(--bg-main);
   }
 }
+
 .row_odd {
   background: var(--table-row-bg2);
 }
+
 .row_even {
   background: var(--table-row-bg1);
 }

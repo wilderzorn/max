@@ -11,27 +11,27 @@
     "build:dev": "cross-env UMI_ENV=dev max build",
     "commitlint": "commitlint --edit",
     "dev": "cross-env CLIENT_ENV=dev max dev",
-    "format": "prettier --write .",
-    "postinstall": "max setup",
+    "format": "prettier --cache --write .",
     "precommit": "lint-staged",
     "prepare": "husky install",
     "preview": "max preview",
     "setup": "max setup",
     "start": "cross-env CLIENT_ENV=pre max dev",
-    "lint": "max setup && npm run lint:js && npm run lint:style && npm run lint:prettier",
-    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "umi lint --eslint-only",
+    "lint:fix": "umi lint --fix",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
-    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "lint:style": "umi lint --stylelint-only",
+    "lint:cssinjs": "umi lint --stylelint-only --cssinjs",
     "precommit:fix": "npm run lint:fix && npm run prettier && npm run lint:prettier && npm run lint:style",
-    "prettier": "prettier -c --write \"src/**/*\""
+    "prettier": "prettier -c --write \"src/**/*\"",
+    "lint":"max setup && npm run lint:js && npm run lint:style && npm run lint:prettier"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,md}": [
-      "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
+      "eslint --ext .js,.jsx,.ts,.tsx src --fix",
       "git add"
     ]
   },
@@ -58,8 +58,8 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "@types/react-virtualized": "^9.21.30",
-    "@umijs/fabric": "2.14.1",
     "cross-env": "^7.0.3",
+    "eslint": "8.49.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
@@ -68,6 +68,6 @@
     "typescript": "5.0.3"
   },
   "volta": {
-    "node": "18.20.3"
+    "node": "20.15.1"
   }
 }

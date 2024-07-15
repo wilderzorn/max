@@ -1,6 +1,6 @@
+import buding from '@/assets/buding.png';
 import type { GraphData, TreeGraph, TreeGraphData } from '@antv/g6';
 import G6 from '@antv/g6';
-import buding from '@/assets/buding.png';
 
 interface IProps {
   data: GraphData | TreeGraphData;
@@ -29,7 +29,13 @@ class ExtendGraph {
         },
       },
       modes: {
-        default: ['zoom-canvas', 'drag-canvas', 'drag-node', 'brush-select', 'click-select'],
+        default: [
+          'zoom-canvas',
+          'drag-canvas',
+          'drag-node',
+          'brush-select',
+          'click-select',
+        ],
       },
       layout: {
         type: 'indented',
@@ -108,9 +114,8 @@ class ExtendGraph {
   public onGraphRender = async (): Promise<void> => {
     if (this.graph) {
       this.graph.render();
-
-      this.graph.layout();
-      await onWait();
+      // this.graph.layout();
+      // await onWait();
       this.graph.fitView(40);
     }
   };
@@ -136,11 +141,17 @@ class ExtendGraph {
 
   private onResize = (): void => {
     if (this.graphRef && this.graph) {
-      this.graph.changeSize(this.graphRef.offsetWidth, this.graphRef.offsetHeight);
+      this.graph.changeSize(
+        this.graphRef.offsetWidth,
+        this.graphRef.offsetHeight,
+      );
     }
   };
 
-  private debounce(func: (...args: any[]) => void, wait: number): (...args: any[]) => void {
+  private debounce(
+    func: (...args: any[]) => void,
+    wait: number,
+  ): (...args: any[]) => void {
     let timeout: number | undefined;
     return (...args: any[]): void => {
       const later = (): void => {
@@ -155,14 +166,6 @@ class ExtendGraph {
 
 const graphInstance = new ExtendGraph();
 export default graphInstance;
-
-const onWait = async (timer = 500): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, timer);
-  });
-};
 
 //注册节点
 export function onRegisterGraph() {
@@ -285,7 +288,9 @@ export function onRegisterGraph() {
         };
         const group = item.getContainer();
         let mask = group.find((ele) => ele.get('name') === 'mask-shape');
-        let maskLabel = group.find((ele) => ele.get('name') === 'mask-label-shape');
+        let maskLabel = group.find(
+          (ele) => ele.get('name') === 'mask-label-shape',
+        );
         if (level === 0) {
           group.get('children').forEach((child) => {
             if (child.get('name')?.includes('collapse')) return;
@@ -317,8 +322,12 @@ export function onRegisterGraph() {
               // must be assigned in G6 3.3 and later versions. it can be any string you want, but should be unique in a custom item type
               name: 'mask-label-shape',
             });
-            const collapseRect = group.find((ele) => ele.get('name') === 'collapse-back');
-            const collapseText = group.find((ele) => ele.get('name') === 'collapse-text');
+            const collapseRect = group.find(
+              (ele) => ele.get('name') === 'collapse-back',
+            );
+            const collapseText = group.find(
+              (ele) => ele.get('name') === 'collapse-text',
+            );
             collapseRect?.toFront();
             collapseText?.toFront();
           } else {
@@ -363,7 +372,9 @@ export function onRegisterGraph() {
         }
         if (name === 'collapse') {
           const group = item.getContainer();
-          const collapseText = group.find((e) => e.get('name') === 'collapse-text');
+          const collapseText = group.find(
+            (e) => e.get('name') === 'collapse-text',
+          );
           if (collapseText) {
             if (!value) {
               collapseText.attr({
@@ -418,7 +429,9 @@ export function onRegisterGraph() {
             coefficientX,
             coefficientY,
           } = sourceNode ? sourceNode.getModel() : startPoint;
-          const { x: endX, y: endY } = targetNode ? targetNode.getModel() : endPoint;
+          const { x: endX, y: endY } = targetNode
+            ? targetNode.getModel()
+            : endPoint;
           let curveStart = (endX - startX) * coefficientX;
           let curveEnd = (endY - startY) * coefficientY;
           curveStart = curveStart > 40 ? 40 : curveStart;
@@ -456,7 +469,11 @@ export function onRegisterGraph() {
  * @param {number} fontSize font size
  * @return {string} the processed result
  */
-const fittingString = (str: string, maxWidth: number, fontSize: number): string => {
+const fittingString = (
+  str: string,
+  maxWidth: number,
+  fontSize: number,
+): string => {
   const ellipsis = '...';
   const ellipsisLength = G6.Util.getTextSize(ellipsis, fontSize)[0];
   let currentWidth = 0;

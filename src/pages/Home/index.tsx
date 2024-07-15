@@ -1,11 +1,20 @@
+import { useTRState } from '#/utils/trHooks';
 import Guide from '@/components/Guide';
 import { trim } from '@/utils/format';
-import { useModel } from '@umijs/max';
-import styles from './index.less';
-import React from 'react';
-import { Button, DatePicker, Form, Segmented, TreeSelect, Spin, Empty, Input } from 'antd';
-import { useTRState } from '#/utils/trHooks';
+import { FormattedMessage, useModel } from '@umijs/max';
+import {
+  Button,
+  DatePicker,
+  Empty,
+  Form,
+  Input,
+  Segmented,
+  Spin,
+  TreeSelect,
+} from 'antd';
 import type { Dayjs } from 'dayjs';
+import React from 'react';
+import styles from './index.less';
 const { RangePicker } = DatePicker;
 type RangeValue = [Dayjs | null, Dayjs | null] | null;
 
@@ -84,7 +93,10 @@ const HomePage: React.FC = () => {
       return false;
     }
     const tooLate = dates[0] || dates[1];
-    return current.diff(tooLate, 'days') > 7 || (tooLate as Dayjs).diff(current, 'days') > 7;
+    return (
+      current.diff(tooLate, 'days') > 7 ||
+      (tooLate as Dayjs).diff(current, 'days') > 7
+    );
   };
 
   const onOpenChange = (open) => {
@@ -108,9 +120,14 @@ const HomePage: React.FC = () => {
   };
   return (
     <div className={styles.container}>
+      <FormattedMessage id="user.welcome" values={{ name: '张三' }} />
       <Guide name={trim(global.name)} />
       <Form form={form}>
-        <Form.Item label="实验" name={'timeRange'} style={{ marginRight: '10px' }}>
+        <Form.Item
+          label="实验"
+          name={'timeRange'}
+          style={{ marginRight: '10px' }}
+        >
           <Segmented
             options={[
               {
@@ -131,7 +148,9 @@ const HomePage: React.FC = () => {
         <Form.Item
           label="DatePicker"
           name="datePicker"
-          rules={[{ required: false, message: 'Please input your datePicker!' }]}
+          rules={[
+            { required: false, message: 'Please input your datePicker!' },
+          ]}
         >
           <RangePicker
             // disabled={_timeRange !== 'soonMy'}
@@ -186,7 +205,11 @@ const HomePage: React.FC = () => {
                 },
               ]}
             >
-              <Input.TextArea maxLength={5000} rows={6} placeholder="请填写公告内容" />
+              <Input.TextArea
+                maxLength={5000}
+                rows={6}
+                placeholder="请填写公告内容"
+              />
             </Form.Item>
             <Form.Item noStyle>
               <Button type="primary">智能识别</Button>

@@ -1,10 +1,12 @@
 import { MicroApp, useLocation } from '@umijs/max';
-import { MICRO_CONFIG } from './helper';
 import React from 'react';
+import { MICRO_CONFIG } from './helper';
 const Micro = () => {
   const location = useLocation();
   const searchStr =
-    location.search?.[0] === '?' ? location.search.substring(1) : location.search || '';
+    location.search?.[0] === '?'
+      ? location.search.substring(1)
+      : location.search || '';
 
   const url = (location.pathname ?? '').replace('/web', '');
 

@@ -71,4 +71,12 @@ export default defineConfig({
   },
   proxy,
   styledComponents: {}, // @umijs/max 内置了 styled-components 样式方案。配置开启。
+  locale: {
+    // 默认使用 src/locales/zh-CN.ts 作为多语言文件
+    default: 'zh-CN', // 默认语言
+    antd: true, // 是否启用 Ant Design 的国际化
+    baseNavigator: true, // 是否根据浏览器语言自动设置
+    title: false,
+    baseSeparator: '-',
+  },
 });

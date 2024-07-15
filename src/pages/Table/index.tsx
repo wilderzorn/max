@@ -1,12 +1,11 @@
-import { useStaticState, useTRState } from '#/utils/trHooks';
-import { useEffect } from 'react';
-import styles from './index.less';
-import { useModel } from '@umijs/max';
 import PageLoading from '#/components/PageLoading';
-import Virtual from './virtual';
-import { columns, dataList } from './helper';
+import { useStaticState, useTRState } from '#/utils/trHooks';
+import { useModel } from '@umijs/max';
 import { Table } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { columns, dataList } from './helper';
+import styles from './index.less';
+import Virtual from './virtual';
 
 const TRTable = () => {
   const { global } = useModel('global');

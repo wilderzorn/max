@@ -1,6 +1,5 @@
-import request from '#/utils/request';
 // 登陆接口
-export async function onLogin(data) {
+export async function onLogin(data): Promise<any> {
   return await new Promise(async (resolve) => {
     setTimeout(() => {
       return resolve({

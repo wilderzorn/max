@@ -5,8 +5,8 @@
  * @Description: 策略配置
  */
 import React from 'react';
-import styles from './index.less';
 import graphInstance, { onRegisterGraph } from './extend';
+import styles from './index.less';
 
 const Strategy = () => {
   const ref: any = React.useRef(null);
@@ -26,7 +26,12 @@ const Strategy = () => {
       children: [
         {
           id: 'A1',
-          children: [{ id: 'A11', name: '123123' }, { id: 'A12' }, { id: 'A13' }, { id: 'A14' }],
+          children: [
+            { id: 'A11', name: '123123' },
+            { id: 'A12' },
+            { id: 'A13' },
+            { id: 'A14' },
+          ],
         },
         {
           id: 'A2',

@@ -1,45 +1,49 @@
+import TREmpty from '#/components/TREmpty';
+import useAlert from '#/hooks/useAlert';
+import useMessage from '#/hooks/useMessage';
+import useNotice from '#/hooks/useNotice';
+import abortableDelay from '#/utils/abortableDelay';
+import { useStaticState } from '#/utils/trHooks';
 import { PageContainer } from '@ant-design/pro-components';
-import { Access, useAccess } from '@umijs/max';
 import { Button } from 'antd';
 import React from 'react';
-import TREmpty from '#/components/TREmpty';
+import Business from './business';
 
 const AccessPage: React.FC = () => {
-  const access = useAccess();
-  React.useEffect(() => {
-    onFeach();
-  }, []);
+  const [alert, AlertContext] = useAlert();
+  const [message, MessageContext] = useMessage();
+  const [notice, NoticeContext] = useNotice();
 
-  const onFeach = () => {
-    const roleData = [
-      {
-        label: '1',
-        value: [1],
-      },
-      {
-        label: '2',
-        value: [2],
-      },
-      {
-        label: '3',
-        value: [3],
-      },
-      {
-        label: '4',
-        value: [4],
-      },
-    ];
-    const roleCheckList = [[2], [3]];
+  const staticState = useStaticState({
+    controller: null,
+  });
 
-    roleData.forEach((role) => {
-      const isIncluded = roleCheckList.some(
-        (checkValue) => JSON.stringify(checkValue) === JSON.stringify(role.value),
-      );
-      // console.log(`标签为 ${role.label} 的角色${isIncluded ? '' : '不'}包含在 roleCheckList 中`);
-    });
+  const onStartAsyn = async () => {
+    if (staticState.controller) {
+      staticState.controller.abort();
+    }
+    staticState.controller = new AbortController();
+    try {
+      await abortableDelay(2000, { signal: staticState.controller.signal });
+      staticState.controller = null;
+    } catch (error) {
+      staticState.controller = null;
+    }
   };
 
-  const onIsStart = () => {};
+  const onStopAsyn = () => {
+    staticState.controller.abort();
+  };
+
+  const onIsStart = async () => {
+    const res = await alert.confirm('阿思达部分地方复古风');
+    // console.log(res, 'res');
+  };
+
+  const onShowModal = async () => {
+    const res = await notice.show(Business);
+    // console.log(res, 'res');
+  };
 
   return (
     <PageContainer
@@ -48,11 +52,23 @@ const AccessPage: React.FC = () => {
         title: '权限示例',
       }}
     >
-      <Button onClick={onIsStart}>询问</Button>
+      <Button onClick={onStartAsyn}>开始异步</Button>
+      <Button onClick={onStopAsyn}>停止异步</Button>
+      <Button onClick={onIsStart}>alert</Button>
+      <Button
+        onClick={() => {
+          message.info('这个是阿萨发给的方法');
+        }}
+      >
+        messsage
+      </Button>
+      <Button onClick={onShowModal} type="primary">
+        弹窗
+      </Button>
       <TREmpty />
-      <Access accessible={access.canSeeAdmin}>
-        <Button>只有 Admin 可以看到这个按钮</Button>
-      </Access>
+      {AlertContext}
+      {MessageContext}
+      {NoticeContext}
     </PageContainer>
   );
 };
