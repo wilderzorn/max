@@ -62,7 +62,9 @@ export default defineConfig({
     '@': '/src',
   },
   //配置 <head> 中的额外 script。
-  headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
+  headScripts: IS_PRODUCTION
+    ? ['window.publicPath = window.resourceBaseUrl || "/web/"']
+    : [],
   // headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
   // 配置 <body> 中额外的 script 标签。
   scripts: ['https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js'],

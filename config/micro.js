@@ -6,7 +6,9 @@ export const MICRO_CIG = {
     apps: [
       {
         name: 'configure', // 唯一 id
-        entry: IS_PRODUCTION ? '/web/child/trconfigure/index.html' : `//localhost:9001`, // 辅助模块独立运行项目
+        entry: IS_PRODUCTION
+          ? '/web/child/trconfigure/index.html'
+          : `//localhost:9001`, // 辅助模块独立运行项目
       },
     ],
   },

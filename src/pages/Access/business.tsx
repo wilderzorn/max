@@ -2,7 +2,6 @@ import useNotice from '#/hooks/useNotice';
 import { AlertResult } from '#/utils/contacts';
 import { useTRState } from '#/utils/trHooks';
 import { Button, Form, Input, Modal, Select } from 'antd';
-import React from 'react';
 import Config from './config';
 const business = (props) => {
   const { onPress } = props;
@@ -23,7 +22,7 @@ const business = (props) => {
   };
 
   const onOpen = async () => {
-    const res = await notice.show(Config);
+    const res = await notice.open(business);
     // console.log(res, '---res---');
   };
 

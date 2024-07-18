@@ -2,7 +2,7 @@ import PageLoading from '#/components/PageLoading';
 import { useStaticState, useTRState } from '#/utils/trHooks';
 import { useModel } from '@umijs/max';
 import { Table } from 'antd';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { columns, dataList } from './helper';
 import styles from './index.less';
 import Virtual from './virtual';

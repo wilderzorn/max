@@ -18,3 +18,7 @@ yarn-error.log
 .DS_Store
 /config/routes.ts
 .eslintcache
+build/
+coverage/
+.vscode/
+node_modules/

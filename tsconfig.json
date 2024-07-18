@@ -17,7 +17,7 @@
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "types": ["react", "react-dom"]
   },
   "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts"],

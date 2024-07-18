@@ -1,4 +1,4 @@
-export const webpackPlugin = (config) => {
+export const webpackPlugin = (config: any) => {
   config.merge({
     optimization: {
       splitChunks: {
@@ -19,7 +19,9 @@ export const webpackPlugin = (config) => {
           antdesigns: {
             name: 'antdesigns',
             test({ resource }) {
-              return /[\\/]node_modules[\\/](@ant-design|antd|@antd)[\\/]/.test(resource);
+              return /[\\/]node_modules[\\/](@ant-design|antd|@antd)[\\/]/.test(
+                resource,
+              );
             },
             priority: 40,
             enforce: true,

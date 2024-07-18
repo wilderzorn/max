@@ -20,13 +20,13 @@ const AccessPage: React.FC = () => {
 
   const onStartAsyn = async () => {
     if (staticState.controller) {
-      staticState.controller.abort();
+      staticState.controller?.abort();
     }
     staticState.controller = new AbortController();
     try {
       await abortableDelay(2000, { signal: staticState.controller.signal });
       staticState.controller = null;
-    } catch (error) {
+    } catch {
       staticState.controller = null;
     }
   };
@@ -36,12 +36,14 @@ const AccessPage: React.FC = () => {
   };
 
   const onIsStart = async () => {
-    const res = await alert.confirm('阿思达部分地方复古风');
+    const res = await alert.confirm({ title: '这个是阿萨发给的方法' });
+    if (res !== 1) return;
     // console.log(res, 'res');
   };
 
   const onShowModal = async () => {
-    const res = await notice.show(Business);
+    const res = await notice.open(Business);
+    if (res.index !== 1) return;
     // console.log(res, 'res');
   };
 

@@ -17,9 +17,10 @@ import {
 import { useExternal } from 'ahooks';
 import { Button, ColorPicker, Divider, Flex, Switch } from 'antd';
 import { ThemeProvider } from 'antd-style';
-import React, { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import logo from '../../public/logo.png';
 import styles from './index.less';
+import { DEFAULT_NAME } from '@/constants';
 
 const publicPath = `${(window as any)?.publicPath ?? '/'}`;
 const THEME_PATH = {
@@ -149,6 +150,7 @@ export default () => {
           );
         }}
         logo={logo}
+        title={DEFAULT_NAME}
         menuFooterRender={({ collapsed }: any) => {
           return (
             <Fragment>

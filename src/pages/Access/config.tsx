@@ -1,6 +1,5 @@
 import { useTRState } from '#/utils/trHooks';
 import { Drawer } from 'antd';
-import React from 'react';
 
 const Config = ({ onPress }) => {
   const [state, setState] = useTRState({

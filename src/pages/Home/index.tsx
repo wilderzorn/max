@@ -110,7 +110,7 @@ const HomePage: React.FC = () => {
     }
   };
   const handleOk = async () => {
-    const valuse = await form.validateFields();
+    const _valuse = await form.validateFields();
     // console.log(valuse, '-valuse------');
   };
   const customSort = (a, b) => {
