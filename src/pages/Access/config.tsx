@@ -1,4 +1,4 @@
-import { useTRState } from '#/utils/trHooks';
+import { useTRState } from '#/hooks/trHooks';
 import { Drawer } from 'antd';
 
 const Config = ({ onPress }) => {

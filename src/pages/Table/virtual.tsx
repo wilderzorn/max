@@ -1,4 +1,4 @@
-import { useStaticState, useTRState } from '#/utils/trHooks';
+import { useStaticState, useTRState } from '#/hooks/trHooks';
 import { useModel } from '@umijs/max';
 import { Checkbox } from 'antd';
 import cls from 'classnames';

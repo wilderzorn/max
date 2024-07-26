@@ -13,3 +13,6 @@ declare module '*.svg' {
 
 declare module '*.jsx';
 declare module '*.js';
+interface Window {
+  emitter: any;
+}

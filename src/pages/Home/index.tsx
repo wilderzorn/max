@@ -1,4 +1,4 @@
-import { useTRState } from '#/utils/trHooks';
+import { useTRState } from '#/hooks/trHooks';
 import Guide from '@/components/Guide';
 import { trim } from '@/utils/format';
 import { FormattedMessage, useModel } from '@umijs/max';

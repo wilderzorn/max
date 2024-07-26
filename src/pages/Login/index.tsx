@@ -1,5 +1,5 @@
 import { setAuthorization } from '#/utils/authority';
-import { useTRState } from '#/utils/trHooks';
+import { useTRState } from '#/hooks/trHooks';
 import { onLogin } from '@/services/user';
 import { FormattedMessage, history, useIntl } from '@umijs/max';
 import type { FormProps } from 'antd';

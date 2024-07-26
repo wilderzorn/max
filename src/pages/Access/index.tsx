@@ -3,7 +3,7 @@ import useAlert from '#/hooks/useAlert';
 import useMessage from '#/hooks/useMessage';
 import useNotice from '#/hooks/useNotice';
 import abortableDelay from '#/utils/abortableDelay';
-import { useStaticState } from '#/utils/trHooks';
+import { useStaticState } from '#/hooks/trHooks';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React from 'react';
@@ -36,15 +36,13 @@ const AccessPage: React.FC = () => {
   };
 
   const onIsStart = async () => {
-    const res = await alert.confirm({ title: '这个是阿萨发给的方法' });
-    if (res !== 1) return;
-    // console.log(res, 'res');
+    const index = await alert.confirm({ title: '这个是阿萨发给的方法' });
+    if (index !== 1) return;
   };
 
   const onShowModal = async () => {
     const res = await notice.open(Business);
     if (res.index !== 1) return;
-    // console.log(res, 'res');
   };
 
   return (
@@ -59,7 +57,7 @@ const AccessPage: React.FC = () => {
       <Button onClick={onIsStart}>alert</Button>
       <Button
         onClick={() => {
-          message.info('这个是阿萨发给的方法');
+          message.info('messsage');
         }}
       >
         messsage

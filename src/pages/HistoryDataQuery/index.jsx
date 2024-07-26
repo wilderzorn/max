@@ -176,7 +176,7 @@ const option = {
     },
   ],
 };
-import { useResize, useStaticState } from '#/utils/trHooks';
+import { useResize, useStaticState } from '#/hooks/trHooks';
 import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
 import { useFullscreen, useSize } from 'ahooks';
 import React from 'react';

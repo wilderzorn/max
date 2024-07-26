@@ -1,8 +1,8 @@
 import abortableDelay from '#/utils/abortableDelay';
 import applyTheme from '#/utils/applyTheme';
 import { setAuthorization } from '#/utils/authority';
-import emitter from '#/utils/emitter.js';
-import { useStaticState, useTRState } from '#/utils/trHooks';
+import emitter from '#/utils/emitter';
+import { useStaticState, useTRState } from '#/hooks/trHooks';
 import { PoweroffOutlined } from '@ant-design/icons';
 import type { MenuDataItem } from '@ant-design/pro-components';
 import { ProLayout } from '@ant-design/pro-components';

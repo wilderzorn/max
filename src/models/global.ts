@@ -1,5 +1,5 @@
 // 全局共享数据示例
-import { useTRState } from '#/utils/trHooks';
+import { useTRState } from '#/hooks/trHooks';
 import { DEFAULT_NAME } from '@/constants';
 import { getLocale } from '@umijs/max';
 const Global = () => {

@@ -47,7 +47,7 @@
     "antd-style": "^3.6.2",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
-    "events": "^3.3.0",
+    "emittery": "^1.0.3",
     "lodash": "^4.17.21",
     "rc-notification": "^5.5.0",
     "rc-tween-one": "^3.0.6",

@@ -1,5 +1,5 @@
 import PageLoading from '#/components/PageLoading';
-import { useStaticState, useTRState } from '#/utils/trHooks';
+import { useStaticState, useTRState } from '#/hooks/trHooks';
 import { useModel } from '@umijs/max';
 import { Table } from 'antd';
 import { useEffect } from 'react';
