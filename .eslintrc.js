@@ -36,5 +36,6 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     // 将未使用变量的规则设置为警告而不是错误
     '@typescript-eslint/no-unused-vars': 'off',
+    'no-useless-catch': 'off', // 允许catch语句中没有变量声明
   },
 };
