@@ -59,4 +59,7 @@
   --table-row-bg2: #f3f3f3;
   --table-border-color: #747474;
   --table-hover-bg: #e6f3ff;
+  /* 背景色 */
+  --faultPopBg:linear-gradient(180deg, #FFD9D9 0%, #FFF 100%);
+  --alertPopBg:linear-gradient(180deg, #FFECD9 0%, #FFF 100%);
 }

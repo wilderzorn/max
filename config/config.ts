@@ -22,7 +22,7 @@ export default defineConfig({
   fastRefresh: true,
   conventionLayout: false, //src/layouts/index.[tsx|vue|jsx|js] 为约定式布局，默认开启
   routes,
-  npmClient: 'npm',
+  npmClient: 'pnpm',
   outputPath: `/web`, // 打包输出路径。
   publicPath: IS_PRODUCTION ? `${DQ_BASE}` : '/',
   // publicPath: `${DQ_BASE}`,

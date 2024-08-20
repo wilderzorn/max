@@ -5,5 +5,6 @@ module.exports = {
     'color-function-notation': 'legacy',
     'alpha-value-notation': 'number',
     'selector-class-pattern': null, // 取消 class 命名规则
+    'custom-property-pattern': null, // 自定义属性的命名将不再受到任何格式限制
   },
 };

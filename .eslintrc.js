@@ -35,17 +35,6 @@ module.exports = {
     '@typescript-eslint/no-unused-expressions': 'off',
     '@typescript-eslint/ban-types': 'off',
     // 将未使用变量的规则设置为警告而不是错误
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        args: 'all',
-        argsIgnorePattern: '^_',
-        caughtErrors: 'all',
-        caughtErrorsIgnorePattern: '^_',
-        destructuredArrayIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        ignoreRestSiblings: true,
-      },
-    ],
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

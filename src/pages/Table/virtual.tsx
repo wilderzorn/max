@@ -2,17 +2,17 @@ import { useStaticState, useTRState } from '#/hooks/trHooks';
 import { useModel } from '@umijs/max';
 import { Checkbox } from 'antd';
 import cls from 'classnames';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   AutoSizer,
   CellMeasurer,
   CellMeasurerCache,
   MultiGrid,
 } from 'react-virtualized';
-import { columns, columnsRatio, dataList } from './helper';
+import { columns, columnsRatio } from './helper';
 import styles from './index.less';
 
-const Virtual = () => {
+const Virtual = ({ dataList }) => {
   const { global } = useModel('global');
   const gridRef = useRef<any>(null);
   const staticState = useStaticState({

@@ -57,12 +57,3 @@ export const columns = [
     ],
   },
 ];
-
-export const dataList = Array(1000)
-  .fill(0)
-  .map((__, i) => ({
-    id: i,
-    name: String(Date.now()),
-    description: String(Date.now()),
-    type: i % 2,
-  }));

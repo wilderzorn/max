@@ -1,6 +1,6 @@
 import { MicroApp, useLocation } from '@umijs/max';
-import React from 'react';
 import { MICRO_CONFIG } from './helper';
+
 const Micro = () => {
   const location = useLocation();
   const searchStr =

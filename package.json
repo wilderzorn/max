@@ -10,19 +10,19 @@
     "build": "cross-env UMI_ENV=release max build",
     "build:dev": "cross-env UMI_ENV=dev max build",
     "commitlint": "commitlint --edit",
-    "dev": "cross-env CLIENT_ENV=dev max dev",
     "format": "prettier --cache --write .",
     "precommit": "lint-staged",
     "prepare": "husky install",
     "preview": "max preview",
     "setup": "max setup",
+    "start:dev": "cross-env CLIENT_ENV=dev max dev",
     "start": "cross-env CLIENT_ENV=pre max dev",
-    "lint:js": "umi lint --eslint-only",
-    "lint:fix:js": "umi lint --fix --eslint-only",
-    "lint:style": "umi lint --stylelint-only",
-    "lint:fix:style": "umi lint --fix --stylelint-only",
-    "lint:cssinjs": "umi lint --cssinjs",
-    "lint:fix:cssinjs": "umi lint --fix --cssinjs",
+    "lint:js": "max lint --eslint-only",
+    "lint:fix:js": "max lint --fix --eslint-only",
+    "lint:style": "max lint --stylelint-only",
+    "lint:fix:style": "max lint --fix --stylelint-only",
+    "lint:cssinjs": "max lint --cssinjs",
+    "lint:fix:cssinjs": "max lint --fix --cssinjs",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:fix:prettier": "prettier -c --write \"src/**/*\"",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:cssinjs && npm run lint:prettier",
@@ -34,7 +34,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,less}": [
-      "umi lint"
+      "max lint"
     ]
   },
   "dependencies": {
@@ -48,9 +48,11 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
     "emittery": "^1.0.3",
+    "es-toolkit": "^1.13.1",
     "lodash": "^4.17.21",
     "rc-notification": "^5.5.0",
     "rc-tween-one": "^3.0.6",
+    "react": "^18.3.1",
     "react-virtualized": "^9.22.5"
   },
   "devDependencies": {
@@ -69,6 +71,7 @@
     "typescript": "5.0.3"
   },
   "volta": {
-    "node": "20.15.1"
+    "node": "20.16.0",
+    "pnpm": "9.7.1"
   }
 }
