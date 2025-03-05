@@ -37,7 +37,7 @@
     "@antv/l7": "2.20.11",
     "@antv/l7-district": "^2.3.12",
     "@antv/l7-maps": "2.20.11",
-    "@umijs/max": "^4.3.24",
+    "@umijs/max": "^4.4.6",
     "ahooks": "^3.8.1",
     "antd": "^5.24.2",
     "antd-style": "^3.7.0",
