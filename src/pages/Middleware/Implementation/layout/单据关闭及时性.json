@@ -1,0 +1,554 @@
+{
+  "执行时间": {
+    "config": {
+      "suffix": "配置需要执行的时间，可点击添加行和删除对应行"
+    },
+    "columns": [
+      [
+        {
+          "key": "executionTime",
+          "dataType": "virtualTabel",
+          "desc": "执行时间",
+          "isAdd": true,
+          "defaultValues": {
+            "executionTime": null,
+            "isRemind": "否",
+            "strategy": [],
+            "showStrategy": null
+          },
+          "style": { "height": 180 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 90 }
+          },
+          "columns": [
+            {
+              "desc": "执行时间",
+              "key": "executionTime",
+              "dataType": "timePicker",
+              "style": { "width": 120 }
+            },
+            {
+              "desc": "是否提醒",
+              "key": "isRemind",
+              "dataType": "select",
+              "style": { "width": 120 },
+              "options": [
+                { "label": "是", "value": "是" },
+                { "label": "否", "value": "否" }
+              ]
+            },
+            {
+              "desc": "任务分发策略",
+              "key": "strategy",
+              "dataType": "multiple",
+              "style": { "width": 300 },
+              "dicStaticKey": "strategyList",
+              "allowClearKeys": ["showStrategy"],
+              "disabledObj": { "key": "isRemind", "values": ["是"] }
+            },
+            {
+              "desc": "显示的任务分发策略",
+              "key": "showStrategy",
+              "dataType": "select",
+              "style": { "width": 180 },
+              "options": [],
+              "dynamicKey": "strategy",
+              "dicStaticKey": "strategyList",
+              "disabledObj": { "key": "isRemind", "values": ["是"] }
+            },
+            { "dataType": "operationDel", "style": { "width": 20 } }
+          ]
+        }
+      ]
+    ]
+  },
+  "风机故障提报单": {
+    "config": {
+      "suffix": "1、开启表示进行风机故障提报单判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "key": "receiptStatisticsStatus",
+          "desc": "单据统计状态",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "处理中", "value": "处理中" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        },
+        {
+          "key": "deviceRecoveryStatus",
+          "desc": "设备恢复状态",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        }
+      ]
+    ]
+  },
+  "电气故障提报单": {
+    "config": {
+      "suffix": "1、开启表示进行电气故障提报单判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "处理中", "value": "处理中" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        }
+      ]
+    ]
+  },
+  "场站通讯中断提报单": {
+    "config": {
+      "suffix": "1、开启表示进行场站通讯中断提报单判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待恢复", "value": "待恢复" },
+            { "label": "现场处理中", "value": "现场处理中" },
+            { "label": "处理中", "value": "处理中" },
+            { "label": "集控处理", "value": "集控处理" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        }
+      ]
+    ]
+  },
+  "光伏故障提报单": {
+    "config": {
+      "suffix": "1、开启表示进行光伏故障提报单判断，关闭，直接按照不是判断处理\n2、直接判断单据是否关闭"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "处理中", "value": "处理中" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        }
+      ]
+    ]
+  },
+  "风机单台工作票": {
+    "config": {
+      "suffix": "1、开启表示进行风机多台工作票判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "待许可", "value": "待许可" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "已删除", "value": "已删除" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        },
+        {
+          "desc": "不包含工作类型",
+          "key": "notIncludeJobType",
+          "dataType": "multiple",
+          "options": [
+            { "label": "故障", "value": "BY_FAULT" },
+            { "label": "缺陷", "value": "BY_DEFECT" },
+            { "label": "定检", "value": "BY_REGULAR_CHECKUP" },
+            { "label": "巡检", "value": "BY_PATROL_CHECKUP" },
+            { "label": "工程施工", "value": "BY_ENGINEERING_CONSTRUCTION" },
+            { "label": "设备调试", "value": "BY_EQUIPMENT_DEBUGGING" },
+            { "label": "隐患排查", "value": "BY_HIDDEN_DANGER_INVESTIGATION" },
+            { "label": "项目", "value": "BY_PROJECT" },
+            { "label": "其他", "value": "BY_OTHER" },
+            { "label": "预警告警", "value": "BY_WARNING_ALARMS" },
+            { "label": "通讯中断", "value": "BY_COMMUNICATION" }
+          ]
+        }
+      ]
+    ]
+  },
+  "风机多台工作票": {
+    "config": {
+      "suffix": "1、开启表示进行风机多台工作票判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "待许可", "value": "待许可" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "已删除", "value": "已删除" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        },
+        {
+          "desc": "不包含工作类型",
+          "key": "notIncludeJobType",
+          "dataType": "multiple",
+          "options": [
+            { "label": "定检", "value": "BY_REGULAR_CHECKUP" },
+            { "label": "巡检", "value": "BY_PATROL_CHECKUP" },
+            { "label": "设备调试", "value": "BY_EQUIPMENT_DEBUGGING" },
+            { "label": "项目", "value": "BY_PROJECT" },
+            { "label": "其他", "value": "BY_OTHER" },
+            { "label": "半年检", "value": "BY_SEMI_ANNUAL_INSPECTION" },
+            { "label": "工程施工", "value": "BY_ENGINEERING_CONSTRUCTION" },
+            { "label": "通讯中断", "value": "BY_COMMUNICATION" }
+          ]
+        }
+      ]
+    ]
+  },
+  "电气一种工作票": {
+    "config": {
+      "suffix": "1、开启表示进行电气一种票判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待工作票审核", "value": "待工作票审核" },
+            { "label": "待内容检查", "value": "待内容检查" },
+            { "label": "待集控许可", "value": "待集控许可" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待现场人许可", "value": "待现场人许可" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "待填写工作完成情况", "value": "待填写工作完成情况" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "待现场许可", "value": "待现场许可" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "已删除", "value": "已删除" },
+            { "label": "待完善工作内容", "value": "待完善工作内容" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        },
+        {
+          "desc": "不包含工作类型",
+          "key": "notIncludeJobType",
+          "dataType": "multiple",
+          "options": [
+            { "label": "故障", "value": "BY_FAULT" },
+            { "label": "缺陷", "value": "BY_DEFECT" },
+            { "label": "巡检", "value": "BY_PATROL_CHECKUP" },
+            { "label": "工程施工", "value": "BY_ENGINEERING_CONSTRUCTION" },
+            { "label": "设备调试", "value": "BY_EQUIPMENT_DEBUGGING" },
+            { "label": "隐患排查", "value": "BY_HIDDEN_DANGER_INVESTIGATION" },
+            { "label": "项目", "value": "BY_PROJECT" },
+            { "label": "其他", "value": "BY_OTHER" },
+            { "label": "定检预试", "value": "BY_PRERUN_TEST" },
+            { "label": "负荷侧任务", "value": "BY_LOAD" },
+            { "label": "通讯中断", "value": "BY_COMMUNICATION" }
+          ]
+        }
+      ]
+    ]
+  },
+  "电气二种工作票": {
+    "config": {
+      "suffix": "1、开启表示进行电气二种票判断，关闭，直接按照不是判断处理\n2、直接判断单据是否关闭"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待工作票审核", "value": "待工作票审核" },
+            { "label": "待内容检查", "value": "待内容检查" },
+            { "label": "待集控许可", "value": "待集控许可" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待现场人许可", "value": "待现场人许可" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "待现场许可", "value": "待现场许可" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "待完善工作内容", "value": "待完善工作内容" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        },
+        {
+          "desc": "不包含工作类型",
+          "key": "notIncludeJobType",
+          "dataType": "multiple",
+          "options": [
+            { "label": "故障", "value": "BY_FAULT" },
+            { "label": "缺陷", "value": "BY_DEFECT" },
+            { "label": "巡检", "value": "BY_PATROL_CHECKUP" },
+            { "label": "工程施工", "value": "BY_ENGINEERING_CONSTRUCTION" },
+            { "label": "设备调试", "value": "BY_EQUIPMENT_DEBUGGING" },
+            { "label": "隐患排查", "value": "BY_HIDDEN_DANGER_INVESTIGATION" },
+            { "label": "项目", "value": "BY_PROJECT" },
+            { "label": "其他", "value": "BY_OTHER" },
+            { "label": "定检预试", "value": "BY_PRERUN_TEST" },
+            { "label": "负荷侧任务", "value": "BY_LOAD" },
+            { "label": "通讯中断", "value": "BY_COMMUNICATION" },
+            { "label": "定值管理", "value": "BY_CONSTANT_VALUE" }
+          ]
+        }
+      ]
+    ]
+  },
+  "线路一种工作票": {
+    "config": {
+      "suffix": "1、开启表示进行线路一种票判断，关闭，直接按照不是判断处理\n2、依据单据统计状态中所选的状态判断设备是否恢复"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待工作票审核", "value": "待工作票审核" },
+            { "label": "待内容检查", "value": "待内容检查" },
+            { "label": "待集控许可", "value": "待集控许可" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待现场人许可", "value": "待现场人许可" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "待填写工作完成情况", "value": "待填写工作完成情况" },
+            { "label": "待现场许可", "value": "待现场许可" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "待完善工作内容", "value": "待完善工作内容" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        },
+        {
+          "desc": "设备恢复状态",
+          "key": "deviceRecoveryStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "发电运行", "value": "run" },
+            { "label": "非计划停机", "value": "wrongPlanShutdown" },
+            { "label": "计划停机", "value": "planShutdown" },
+            { "label": "限电停机", "value": "limitShutdown" },
+            { "label": "待机", "value": "standby" },
+            { "label": "通讯中断", "value": "comloss" },
+            { "label": "停机", "value": "shutDown" },
+            { "label": "告警", "value": "alert" },
+            { "label": "故障", "value": "fault" },
+            { "label": "限功率", "value": "limitPower" }
+          ]
+        },
+        {
+          "desc": "不包含工作类型",
+          "key": "notIncludeJobType",
+          "dataType": "multiple",
+          "options": [
+            { "label": "故障", "value": "BY_FAULT" },
+            { "label": "缺陷", "value": "BY_DEFECT" },
+            { "label": "巡检", "value": "BY_PATROL_CHECKUP" },
+            { "label": "工程施工", "value": "BY_ENGINEERING_CONSTRUCTION" },
+            { "label": "设备调试", "value": "BY_EQUIPMENT_DEBUGGING" },
+            { "label": "隐患排查", "value": "BY_HIDDEN_DANGER_INVESTIGATION" },
+            { "label": "项目", "value": "BY_PROJECT" },
+            { "label": "其他", "value": "BY_OTHER" },
+            { "label": "定检预试", "value": "BY_PRERUN_TEST" },
+            { "label": "通讯中断", "value": "BY_COMMUNICATION" }
+          ]
+        }
+      ]
+    ]
+  },
+  "线路二种工作票": {
+    "config": {
+      "suffix": "1、开启表示进行线路二种票判断，关闭，直接按照不是判断处理\n2、直接判断单据是否关闭"
+    },
+    "columns": [
+      [
+        {
+          "desc": "单据统计状态",
+          "key": "receiptStatisticsStatus",
+          "dataType": "multiple",
+          "options": [
+            { "label": "未提报", "value": "未提报" },
+            { "label": "待工作票审核", "value": "待工作票审核" },
+            { "label": "待内容检查", "value": "待内容检查" },
+            { "label": "待集控许可", "value": "待集控许可" },
+            { "label": "待终结", "value": "待终结" },
+            { "label": "已提报", "value": "已提报" },
+            { "label": "变更班组人员待许可", "value": "变更班组人员待许可" },
+            { "label": "待签发", "value": "待签发" },
+            { "label": "变更负责人待许可", "value": "变更负责人待许可" },
+            { "label": "待终结工作", "value": "待终结工作" },
+            { "label": "待现场人许可", "value": "待现场人许可" },
+            { "label": "待开工", "value": "待开工" },
+            { "label": "待检查", "value": "待检查" },
+            { "label": "已完成", "value": "已完成" },
+            { "label": "待现场许可", "value": "待现场许可" },
+            { "label": "工作票延期待许可", "value": "工作票延期待许可" },
+            { "label": "待完善工作内容", "value": "待完善工作内容" },
+            { "label": "已删除", "value": "已删除" }
+          ]
+        }
+      ]
+    ]
+  }
+}

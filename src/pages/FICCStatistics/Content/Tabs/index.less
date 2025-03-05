@@ -1,0 +1,36 @@
+.tabs {
+  background-color: var(----, #242833);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  gap: 10px;
+  overflow: hidden;
+  transition: width 0.3s ease;
+
+  .collapsed {
+    display: flex;
+    font-size: 20px;
+    cursor: pointer;
+    justify-content: center;
+  }
+
+  .tab {
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &_checked {
+      background-color: rgba(24, 160, 251, 0.1);
+      color: var(--unnamed, #0a84ff);
+    }
+
+    &:hover:not(.tab_checked) {
+      opacity: 0.2;
+    }
+  }
+}

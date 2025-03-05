@@ -1,0 +1,1751 @@
+{
+  "通用设置": {
+    "config": {
+      "suffix": "数据轮训判断间隔及AGC管理容量配置。"
+    },
+    "columns": [
+      [
+        {
+          "key": "period",
+          "desc": "数据获取周期",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 60,
+          "max": 60000,
+          "multiplier": 60
+        },
+        {
+          "key": "AGCManageCapacity",
+          "desc": "AGC管理容量",
+          "dataType": "int",
+          "suffix": "MW",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 999,
+          "precision": 2
+        }
+      ]
+    ]
+  },
+  "AGC能量接收指令异常": {
+    "config": {
+      "suffix": "场站额定容量>有功计划值>样板机额定容量总和,满足此条 件开始判定:AGC/能量有功计划值持续设定时间不变化,识 别为接收指令异常。"
+    },
+    "columns": [
+      [
+        {
+          "key": "aloneSwitch",
+          "desc": "",
+          "dataType": "switch"
+        },
+        {
+          "key": "totolPrototypeRatedCapacity",
+          "desc": "样版机额定容量总和",
+          "dataType": "int",
+          "suffix": "MW",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 999,
+          "precision": 2,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        },
+        {
+          "key": "instructionExceptionDuration",
+          "desc": "指令异常持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        }
+      ],
+      [
+        {
+          "key": "compoundSwitch",
+          "desc": "复合判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "compoundJudgment",
+          "desc": "复合判断",
+          "dataType": "chunkTable",
+          "disabledUniteObj": {
+            "compoundSwitch": { "key": "compoundSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加组合",
+              "key": "add"
+            }
+          ],
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "childLayout": [
+            {
+              "dataType": "virtualTabel",
+              "key": "singleJudgement",
+              "operateList": [
+                {
+                  "name": "添加单值条件",
+                  "key": "singleValue"
+                },
+                {
+                  "name": "添加差值条件",
+                  "key": "differenceValue"
+                }
+              ],
+              "defaultValuesObj": {
+                "singleValue": {
+                  "type": "singleValue"
+                },
+                "differenceValue": {
+                  "asset2": null,
+                  "asset2Obj": null,
+                  "point2": null,
+                  "point2Obj": null,
+                  "type": "differenceValue"
+                }
+              },
+              "style": { "height": 130 },
+              "emptyStyle": {
+                "style": { "marginTop": 0, "marginBottom": 0 },
+                "imageStyle": { "height": 42 }
+              },
+              "defaultValues": {
+                "uuid": "uuid",
+                "asset1": null,
+                "asset1Obj": null,
+                "point1": null,
+                "point1Obj": null,
+                "calcTerm": null,
+                "difference": null,
+                "duration": null
+              },
+              "columns": [
+                {
+                  "desc": "设备1",
+                  "key": "asset1",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point1", "point1Obj"],
+                  "otherFields": {
+                    "asset1Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位1",
+                  "key": "point1",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC1",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point1Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "设备2",
+                  "key": "asset2",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point2", "point2Obj"],
+                  "otherFields": {
+                    "asset2Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位2",
+                  "key": "point2",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC2",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point2Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "计算条件",
+                  "key": "calcTerm",
+                  "dataType": "select",
+                  "style": {
+                    "width": 100
+                  },
+                  "options": [
+                    {
+                      "label": ">=",
+                      "value": "ge"
+                    },
+                    {
+                      "label": "<=",
+                      "value": "le"
+                    }
+                  ],
+                  "allowClear": true
+                },
+                {
+                  "desc": "差值",
+                  "key": "difference",
+                  "dataType": "int",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 0,
+                  "max": 1000,
+                  "precision": 2
+                },
+                {
+                  "desc": "持续时间",
+                  "key": "duration",
+                  "dataType": "int",
+                  "suffix": "分钟",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 60,
+                  "max": 60000,
+                  "multiplier": 60
+                },
+                {
+                  "dataType": "operationDel",
+                  "style": {
+                    "width": 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "key": "singleSwitch",
+          "desc": "单独判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "singleJudgement",
+          "dataType": "virtualTabel",
+          "desc": "单独判断",
+          "disabledUniteObj": {
+            "singleSwitch": { "key": "singleSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加单值条件",
+              "key": "singleValue"
+            },
+            {
+              "name": "添加差值条件",
+              "key": "differenceValue"
+            }
+          ],
+          "defaultValuesObj": {
+            "singleValue": {
+              "type": "singleValue"
+            },
+            "differenceValue": {
+              "asset2": null,
+              "asset2Obj": null,
+              "point2": null,
+              "point2Obj": null,
+              "type": "differenceValue"
+            }
+          },
+          "defaultValues": {
+            "uuid": "uuid",
+            "asset1": null,
+            "asset1Obj": null,
+            "point1": null,
+            "point1Obj": null,
+            "calcTerm": null,
+            "difference": null,
+            "duration": null
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "设备1",
+              "key": "asset1",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point1", "point1Obj"],
+              "otherFields": {
+                "asset1Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位1",
+              "key": "point1",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC1",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point1Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "设备2",
+              "key": "asset2",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point2", "point2Obj"],
+              "otherFields": {
+                "asset2Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位2",
+              "key": "point2",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC2",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point2Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "计算条件",
+              "key": "calcTerm",
+              "dataType": "select",
+              "style": {
+                "width": 100
+              },
+              "options": [
+                {
+                  "label": ">=",
+                  "value": "ge"
+                },
+                {
+                  "label": "<=",
+                  "value": "le"
+                }
+              ],
+              "allowClear": true
+            },
+            {
+              "desc": "差值",
+              "key": "difference",
+              "dataType": "int",
+              "style": {
+                "width": 100
+              },
+              "min": 0,
+              "max": 1000,
+              "precision": 2
+            },
+            {
+              "desc": "持续时间",
+              "key": "duration",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": {
+                "width": 100
+              },
+              "min": 60,
+              "max": 60000,
+              "multiplier": 60
+            },
+            {
+              "dataType": "operationDel",
+              "style": {
+                "width": 20
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "AGC能量持续超发": {
+    "config": {
+      "suffix": "控制点有功功率大于调度指令+(设定值)+场站容量*百分比+调 度指令*百分比MW持续设定时间识别为持续超发"
+    },
+    "columns": [
+      [
+        {
+          "key": "aloneSwitch",
+          "desc": "",
+          "dataType": "switch"
+        },
+        {
+          "key": "setValue",
+          "desc": "设定值",
+          "dataType": "int",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 999,
+          "precision": 2,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        },
+        {
+          "key": "AGCManagementCapacityRatio",
+          "desc": "AGC管理容量比例",
+          "dataType": "int",
+          "suffix": "%",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 1000,
+          "precision": 2,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        },
+        {
+          "key": "schedulingInstructions",
+          "desc": "调度指令",
+          "dataType": "int",
+          "suffix": "%",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 1000,
+          "precision": 2,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        },
+        {
+          "key": "sustainedOvertime",
+          "desc": "持续超发时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        }
+      ],
+      [
+        {
+          "key": "compoundSwitch",
+          "desc": "复合判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "compoundJudgment",
+          "desc": "复合判断",
+          "dataType": "chunkTable",
+          "disabledUniteObj": {
+            "compoundSwitch": { "key": "compoundSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加组合",
+              "key": "add"
+            }
+          ],
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "childLayout": [
+            {
+              "dataType": "virtualTabel",
+              "key": "singleJudgement",
+              "operateList": [
+                {
+                  "name": "添加单值条件",
+                  "key": "singleValue"
+                },
+                {
+                  "name": "添加差值条件",
+                  "key": "differenceValue"
+                }
+              ],
+              "defaultValuesObj": {
+                "singleValue": {
+                  "type": "singleValue"
+                },
+                "differenceValue": {
+                  "asset2": null,
+                  "asset2Obj": null,
+                  "point2": null,
+                  "point2Obj": null,
+                  "type": "differenceValue"
+                }
+              },
+              "style": { "height": 130 },
+              "emptyStyle": {
+                "style": { "marginTop": 0, "marginBottom": 0 },
+                "imageStyle": { "height": 42 }
+              },
+              "defaultValues": {
+                "uuid": "uuid",
+                "asset1": null,
+                "asset1Obj": null,
+                "point1": null,
+                "point1Obj": null,
+                "calcTerm": null,
+                "difference": null,
+                "duration": null
+              },
+              "columns": [
+                {
+                  "desc": "设备1",
+                  "key": "asset1",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point1", "point1Obj"],
+                  "otherFields": {
+                    "asset1Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位1",
+                  "key": "point1",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC1",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point1Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "设备2",
+                  "key": "asset2",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point2", "point2Obj"],
+                  "otherFields": {
+                    "asset2Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位2",
+                  "key": "point2",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC2",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point2Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "计算条件",
+                  "key": "calcTerm",
+                  "dataType": "select",
+                  "style": {
+                    "width": 100
+                  },
+                  "options": [
+                    {
+                      "label": ">=",
+                      "value": "ge"
+                    },
+                    {
+                      "label": "<=",
+                      "value": "le"
+                    }
+                  ],
+                  "allowClear": true
+                },
+                {
+                  "desc": "差值",
+                  "key": "difference",
+                  "dataType": "int",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 0,
+                  "max": 1000,
+                  "precision": 2
+                },
+                {
+                  "desc": "持续时间",
+                  "key": "duration",
+                  "dataType": "int",
+                  "suffix": "分钟",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 60,
+                  "max": 60000,
+                  "multiplier": 60
+                },
+                {
+                  "dataType": "operationDel",
+                  "style": {
+                    "width": 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "key": "singleSwitch",
+          "desc": "单独判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "singleJudgement",
+          "dataType": "virtualTabel",
+          "desc": "单独判断",
+          "disabledUniteObj": {
+            "singleSwitch": { "key": "singleSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加单值条件",
+              "key": "singleValue"
+            },
+            {
+              "name": "添加差值条件",
+              "key": "differenceValue"
+            }
+          ],
+          "defaultValuesObj": {
+            "singleValue": {
+              "type": "singleValue"
+            },
+            "differenceValue": {
+              "asset2": null,
+              "asset2Obj": null,
+              "point2": null,
+              "point2Obj": null,
+              "type": "differenceValue"
+            }
+          },
+          "defaultValues": {
+            "uuid": "uuid",
+            "asset1": null,
+            "asset1Obj": null,
+            "point1": null,
+            "point1Obj": null,
+            "calcTerm": null,
+            "difference": null,
+            "duration": null
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "设备1",
+              "key": "asset1",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point1", "point1Obj"],
+              "otherFields": {
+                "asset1Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位1",
+              "key": "point1",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC1",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point1Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "设备2",
+              "key": "asset2",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point2", "point2Obj"],
+              "otherFields": {
+                "asset2Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位2",
+              "key": "point2",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC2",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point2Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "计算条件",
+              "key": "calcTerm",
+              "dataType": "select",
+              "style": {
+                "width": 100
+              },
+              "options": [
+                {
+                  "label": ">=",
+                  "value": "ge"
+                },
+                {
+                  "label": "<=",
+                  "value": "le"
+                }
+              ],
+              "allowClear": true
+            },
+            {
+              "desc": "差值",
+              "key": "difference",
+              "dataType": "int",
+              "style": {
+                "width": 100
+              },
+              "min": 0,
+              "max": 1000,
+              "precision": 2
+            },
+            {
+              "desc": "持续时间",
+              "key": "duration",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": {
+                "width": 100
+              },
+              "min": 60,
+              "max": 60000,
+              "multiplier": 60
+            },
+            {
+              "dataType": "operationDel",
+              "style": {
+                "width": 20
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "AGC能量与调度通讯中断": {
+    "config": {
+      "suffix": "AGC(有功)指令反馈值或能量有功计划值是空值持续设定 值,识别为:AGC/能量出现与调度通讯中断。"
+    },
+    "columns": [
+      [
+        {
+          "key": "unableValueDuration",
+          "desc": "获取不到数值时长",
+          "dataType": "int",
+          "suffix": "秒",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 10000
+        }
+      ]
+    ]
+  },
+  "有功功率持续不变": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "aloneSwitch",
+          "desc": "",
+          "dataType": "switch"
+        },
+        {
+          "key": "instructionExceptionDuration",
+          "desc": "指令异常持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60,
+          "disabledUniteObj": {
+            "aloneSwitch": { "key": "aloneSwitch", "values": [1] }
+          }
+        }
+      ],
+      [
+        {
+          "key": "compoundSwitch",
+          "desc": "复合判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "compoundJudgment",
+          "desc": "复合判断",
+          "dataType": "chunkTable",
+          "disabledUniteObj": {
+            "compoundSwitch": { "key": "compoundSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加组合",
+              "key": "add"
+            }
+          ],
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "childLayout": [
+            {
+              "dataType": "virtualTabel",
+              "key": "singleJudgement",
+              "operateList": [
+                {
+                  "name": "添加单值条件",
+                  "key": "singleValue"
+                },
+                {
+                  "name": "添加差值条件",
+                  "key": "differenceValue"
+                }
+              ],
+              "defaultValuesObj": {
+                "singleValue": {
+                  "type": "singleValue"
+                },
+                "differenceValue": {
+                  "asset2": null,
+                  "asset2Obj": null,
+                  "point2": null,
+                  "point2Obj": null,
+                  "type": "differenceValue"
+                }
+              },
+              "style": { "height": 130 },
+              "emptyStyle": {
+                "style": { "marginTop": 0, "marginBottom": 0 },
+                "imageStyle": { "height": 42 }
+              },
+              "defaultValues": {
+                "uuid": "uuid",
+                "asset1": null,
+                "asset1Obj": null,
+                "point1": null,
+                "point1Obj": null,
+                "calcTerm": null,
+                "difference": null,
+                "duration": null
+              },
+              "columns": [
+                {
+                  "desc": "设备1",
+                  "key": "asset1",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point1", "point1Obj"],
+                  "otherFields": {
+                    "asset1Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位1",
+                  "key": "point1",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC1",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point1Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "设备2",
+                  "key": "asset2",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point2", "point2Obj"],
+                  "otherFields": {
+                    "asset2Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位2",
+                  "key": "point2",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC2",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point2Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "计算条件",
+                  "key": "calcTerm",
+                  "dataType": "select",
+                  "style": {
+                    "width": 100
+                  },
+                  "options": [
+                    {
+                      "label": ">=",
+                      "value": "ge"
+                    },
+                    {
+                      "label": "<=",
+                      "value": "le"
+                    }
+                  ],
+                  "allowClear": true
+                },
+                {
+                  "desc": "差值",
+                  "key": "difference",
+                  "dataType": "int",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 0,
+                  "max": 1000,
+                  "precision": 2
+                },
+                {
+                  "desc": "持续时间",
+                  "key": "duration",
+                  "dataType": "int",
+                  "suffix": "分钟",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 60,
+                  "max": 60000,
+                  "multiplier": 60
+                },
+                {
+                  "dataType": "operationDel",
+                  "style": {
+                    "width": 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "key": "singleSwitch",
+          "desc": "单独判断",
+          "dataType": "switch"
+        },
+        {
+          "key": "singleJudgement",
+          "dataType": "virtualTabel",
+          "desc": "单独判断",
+          "disabledUniteObj": {
+            "singleSwitch": { "key": "singleSwitch", "values": [1] }
+          },
+          "operateList": [
+            {
+              "name": "添加单值条件",
+              "key": "singleValue"
+            },
+            {
+              "name": "添加差值条件",
+              "key": "differenceValue"
+            }
+          ],
+          "defaultValuesObj": {
+            "singleValue": {
+              "type": "singleValue"
+            },
+            "differenceValue": {
+              "asset2": null,
+              "asset2Obj": null,
+              "point2": null,
+              "point2Obj": null,
+              "type": "differenceValue"
+            }
+          },
+          "defaultValues": {
+            "uuid": "uuid",
+            "asset1": null,
+            "asset1Obj": null,
+            "point1": null,
+            "point1Obj": null,
+            "calcTerm": null,
+            "difference": null,
+            "duration": null
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "设备1",
+              "key": "asset1",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point1", "point1Obj"],
+              "otherFields": {
+                "asset1Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位1",
+              "key": "point1",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC1",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point1Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "设备2",
+              "key": "asset2",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point2", "point2Obj"],
+              "otherFields": {
+                "asset2Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位2",
+              "key": "point2",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC2",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point2Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "计算条件",
+              "key": "calcTerm",
+              "dataType": "select",
+              "style": {
+                "width": 100
+              },
+              "options": [
+                {
+                  "label": ">=",
+                  "value": "ge"
+                },
+                {
+                  "label": "<=",
+                  "value": "le"
+                }
+              ],
+              "allowClear": true
+            },
+            {
+              "desc": "差值",
+              "key": "difference",
+              "dataType": "int",
+              "style": {
+                "width": 100
+              },
+              "min": 0,
+              "max": 1000,
+              "precision": 2
+            },
+            {
+              "desc": "持续时间",
+              "key": "duration",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": {
+                "width": 100
+              },
+              "min": 60,
+              "max": 60000,
+              "multiplier": 60
+            },
+            {
+              "dataType": "operationDel",
+              "style": {
+                "width": 20
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "有功计划值小于样板机容量总和": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "totolPrototypeRatedCapacity",
+          "desc": "样版机额定容量总和",
+          "dataType": "int",
+          "suffix": "MW",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 10000,
+          "precision": 2
+        },
+        {
+          "key": "instructionExceptionDuration",
+          "desc": "指令异常持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "能量开环": {
+    "config": {
+      "suffix": "显示能量开环/闭环控制状态显示开环控制状态,持续时间超B 10分钟,恢复后看板上自动关闭。"
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "AGC远方/就地": {
+    "config": {
+      "suffix": "AGC远方/就地,实时状态与初始状态对比发生变化判定退 出,持续超过设定时间判定为真实退出。"
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "AGC运行状态": {
+    "config": {
+      "suffix": "AGC运行状态点号,实时状态与初始状态对比发生变化判定退 出,持续超过设定时间判定为真实退出。"
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "AGC与能量通讯中断": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "AGC能量退出": {
+    "config": {
+      "suffix": "能量\"AGC状态\"点位,AGC\"金风能量管理平台_AGC系统投入\"点位,实时状态与初始状态对比发生变化判定退出,持续 超过设定时间判定为真实退出。"
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "AGC与调度通讯中断": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "initValue",
+          "desc": "初始化值",
+          "dataType": "select",
+          "style": { "width": 100 },
+          "options": [
+            { "label": "0", "value": "0" },
+            { "label": "1", "value": "1" }
+          ]
+        },
+        {
+          "key": "duration",
+          "desc": "持续时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 60000,
+          "multiplier": 60
+        }
+      ]
+    ]
+  },
+  "复合判断": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "compoundJudgment",
+          "desc": "复合判断",
+          "dataType": "chunkTable",
+          "operateList": [
+            {
+              "name": "添加组合",
+              "key": "add"
+            }
+          ],
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "childLayout": [
+            {
+              "dataType": "virtualTabel",
+              "key": "singleJudgement",
+              "operateList": [
+                {
+                  "name": "添加单值条件",
+                  "key": "singleValue"
+                },
+                {
+                  "name": "添加差值条件",
+                  "key": "differenceValue"
+                }
+              ],
+              "defaultValuesObj": {
+                "singleValue": {
+                  "type": "singleValue"
+                },
+                "differenceValue": {
+                  "asset2": null,
+                  "asset2Obj": null,
+                  "point2": null,
+                  "point2Obj": null,
+                  "type": "differenceValue"
+                }
+              },
+              "style": { "height": 130 },
+              "emptyStyle": {
+                "style": { "marginTop": 0, "marginBottom": 0 },
+                "imageStyle": { "height": 42 }
+              },
+              "defaultValues": {
+                "uuid": "uuid",
+                "asset1": null,
+                "asset1Obj": null,
+                "point1": null,
+                "point1Obj": null,
+                "calcTerm": null,
+                "difference": null,
+                "duration": null
+              },
+              "columns": [
+                {
+                  "desc": "设备1",
+                  "key": "asset1",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point1", "point1Obj"],
+                  "otherFields": {
+                    "asset1Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位1",
+                  "key": "point1",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC1",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point1Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "设备2",
+                  "key": "asset2",
+                  "dataType": "select",
+                  "style": { "width": 200 },
+                  "dicStaticKey": "yclAssetList",
+                  "allowClearKeys": ["point2", "point2Obj"],
+                  "otherFields": {
+                    "asset2Obj": {
+                      "assetName": "assetname",
+                      "assetNum": "assetnum",
+                      "model": "model"
+                    }
+                  }
+                },
+                {
+                  "desc": "点位2",
+                  "key": "point2",
+                  "dataType": "select",
+                  "style": { "width": 300 },
+                  "dicStaticKey": "AVCAGC2",
+                  "dynamicKey": "AVCAGCPoint",
+                  "otherFields": {
+                    "point2Obj": {
+                      "labelName": "label",
+                      "labelValue": "value"
+                    }
+                  }
+                },
+                {
+                  "desc": "计算条件",
+                  "key": "calcTerm",
+                  "dataType": "select",
+                  "style": {
+                    "width": 100
+                  },
+                  "options": [
+                    {
+                      "label": ">=",
+                      "value": "ge"
+                    },
+                    {
+                      "label": "<=",
+                      "value": "le"
+                    }
+                  ],
+                  "allowClear": true
+                },
+                {
+                  "desc": "差值",
+                  "key": "difference",
+                  "dataType": "int",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 0,
+                  "max": 1000,
+                  "precision": 2
+                },
+                {
+                  "desc": "持续时间",
+                  "key": "duration",
+                  "dataType": "int",
+                  "suffix": "分钟",
+                  "style": {
+                    "width": 100
+                  },
+                  "min": 60,
+                  "max": 60000,
+                  "multiplier": 60
+                },
+                {
+                  "dataType": "operationDel",
+                  "style": {
+                    "width": 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "单独判断": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "singleJudgement",
+          "dataType": "virtualTabel",
+          "desc": "单独判断",
+          "operateList": [
+            {
+              "name": "添加单值条件",
+              "key": "singleValue"
+            },
+            {
+              "name": "添加差值条件",
+              "key": "differenceValue"
+            }
+          ],
+          "defaultValuesObj": {
+            "singleValue": {
+              "type": "singleValue"
+            },
+            "differenceValue": {
+              "asset2": null,
+              "asset2Obj": null,
+              "point2": null,
+              "point2Obj": null,
+              "type": "differenceValue"
+            }
+          },
+          "defaultValues": {
+            "uuid": "uuid",
+            "asset1": null,
+            "asset1Obj": null,
+            "point1": null,
+            "point1Obj": null,
+            "calcTerm": null,
+            "difference": null,
+            "duration": null
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "设备1",
+              "key": "asset1",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point1", "point1Obj"],
+              "otherFields": {
+                "asset1Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位1",
+              "key": "point1",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC1",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point1Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "设备2",
+              "key": "asset2",
+              "dataType": "select",
+              "style": { "width": 200 },
+              "dicStaticKey": "yclAssetList",
+              "allowClearKeys": ["point2", "point2Obj"],
+              "otherFields": {
+                "asset2Obj": {
+                  "assetName": "assetname",
+                  "assetNum": "assetnum",
+                  "model": "model"
+                }
+              }
+            },
+            {
+              "desc": "点位2",
+              "key": "point2",
+              "dataType": "select",
+              "style": { "width": 300 },
+              "dicStaticKey": "AVCAGC2",
+              "dynamicKey": "AVCAGCPoint",
+              "otherFields": {
+                "point2Obj": {
+                  "labelName": "label",
+                  "labelValue": "value"
+                }
+              }
+            },
+            {
+              "desc": "计算条件",
+              "key": "calcTerm",
+              "dataType": "select",
+              "style": {
+                "width": 100
+              },
+              "options": [
+                {
+                  "label": ">=",
+                  "value": "ge"
+                },
+                {
+                  "label": "<=",
+                  "value": "le"
+                }
+              ],
+              "allowClear": true
+            },
+            {
+              "desc": "差值",
+              "key": "difference",
+              "dataType": "int",
+              "style": {
+                "width": 100
+              },
+              "min": 0,
+              "max": 1000,
+              "precision": 2
+            },
+            {
+              "desc": "持续时间",
+              "key": "duration",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": {
+                "width": 100
+              },
+              "min": 60,
+              "max": 60000,
+              "multiplier": 60
+            },
+            {
+              "dataType": "operationDel",
+              "style": {
+                "width": 20
+              }
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "通知策略配置": {
+    "config": {
+      "suffix": "通知策略配置"
+    },
+    "columns": [
+      [
+        {
+          "key": "strategy",
+          "desc": "任务分发策略",
+          "dataType": "multiple",
+          "dicStaticKey": "strategyList",
+          "allowClearKeys": ["showStrategy"]
+        },
+        {
+          "key": "showStrategy",
+          "desc": "显示的任务分发策略",
+          "dataType": "select",
+          "style": { "width": 180 },
+          "options": [],
+          "dynamicKey": "strategy",
+          "dicStaticKey": "strategyList"
+        }
+      ]
+    ]
+  }
+}

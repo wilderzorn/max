@@ -2,9 +2,6 @@
   "private": true,
   "author": "wilderzorn <wilderzorn@163.com>",
   "name": "maxweb",
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "scripts": {
     "analyze": "cross-env ANALYZE=1 max build",
     "build": "cross-env UMI_ENV=release max build",
@@ -17,17 +14,12 @@
     "setup": "max setup",
     "start:dev": "cross-env CLIENT_ENV=dev max dev",
     "start": "cross-env CLIENT_ENV=pre max dev",
-    "lint:js": "max lint --eslint-only",
-    "lint:fix:js": "max lint --fix --eslint-only",
-    "lint:style": "max lint --stylelint-only",
-    "lint:fix:style": "max lint --fix --stylelint-only",
-    "lint:cssinjs": "max lint --cssinjs",
-    "lint:fix:cssinjs": "max lint --fix --cssinjs",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
-    "lint:fix:prettier": "prettier -c --write \"src/**/*\"",
-    "lint": "npm run lint:js && npm run lint:style && npm run lint:cssinjs && npm run lint:prettier",
-    "lint:fix": "npm run lint:fix:js && npm run lint:fix:style && npm run lint:fix:cssinjs && npm run lint:fix:prettier",
-    "precommit:fix": "npm run lint:fix"
+    "lint:prettier:fix": "prettier -c --write \"src/**/*\"",
+    "lint": "max lint && npm run lint:prettier",
+    "lint:fix": "max lint --fix && npm run lint:prettier:fix",
+    "precommit:fix": "npm run lint:fix",
+    "clean": "npm cache clean -f"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -38,40 +30,50 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
-    "@ant-design/pro-components": "^2.4.4",
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "@ant-design/icons": "^5.5.1",
+    "@ant-design/pro-components": "^2.7.19",
     "@antv/g6": "4.8.24",
-    "@umijs/max": "^4.2.5",
-    "ahooks": "^3.7.11",
-    "antd": "^5.4.0",
-    "antd-style": "^3.6.2",
+    "@antv/l7": "2.20.11",
+    "@antv/l7-district": "^2.3.12",
+    "@antv/l7-maps": "2.20.11",
+    "@umijs/max": "^4.3.24",
+    "ahooks": "^3.8.1",
+    "antd": "^5.24.2",
+    "antd-style": "^3.7.0",
     "classnames": "^2.5.1",
-    "dayjs": "^1.11.11",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "echarts": "5.1.2",
     "emittery": "^1.0.3",
-    "es-toolkit": "^1.13.1",
+    "es-toolkit": "^1.24.0",
     "lodash": "^4.17.21",
-    "rc-notification": "^5.5.0",
+    "moment": "^2.30.1",
+    "rc-notification": "^5.6.2",
     "rc-tween-one": "^3.0.6",
     "react": "^18.3.1",
     "react-virtualized": "^9.22.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@types/lodash": "^4.17.6",
-    "@types/react": "^18.0.33",
-    "@types/react-dom": "^18.0.11",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@types/lodash": "^4.17.10",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
     "@types/react-virtualized": "^9.21.30",
     "cross-env": "^7.0.3",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.2.0",
-    "prettier": "^2.8.7",
-    "prettier-plugin-organize-imports": "^3.2.2",
-    "prettier-plugin-packagejson": "^2.4.3",
-    "typescript": "5.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.3.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.5.2",
+    "typescript": "5.0.3",
+    "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "volta": {
-    "node": "20.16.0",
-    "pnpm": "9.7.1"
+    "node": "20.18.3"
   }
 }

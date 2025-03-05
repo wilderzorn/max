@@ -181,6 +181,7 @@ import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
 import { useFullscreen, useSize } from 'ahooks';
 import React from 'react';
 import styles from './index.less';
+import * as echarts from 'echarts';
 
 // 将UI大小定义为常量，以便于维护
 const DEFAULT_UI_SIZE = { width: 1920, height: 1080 };

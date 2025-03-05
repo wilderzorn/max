@@ -1,0 +1,171 @@
+{
+  "通讯中断是否剔除": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": []
+  },
+  "丢点": {
+    "config": {
+      "suffix": "统计周期内一直没有数据为丢点"
+    },
+    "columns": [
+      [
+        {
+          "key": "period",
+          "desc": "数据获取周期",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 60,
+          "max": 599940
+        },
+        {
+          "key": "countPeriod",
+          "desc": "统计周期",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 60,
+          "max": 599940
+        },
+        {
+          "key": "mergeNotifyPoints",
+          "desc": "合并发送通知的点位",
+          "dataType": "multiple",
+          "multiplier": 60,
+          "dicStaticKey": "cftPointList",
+          "style": { "width": 300 },
+          "otherFields": {
+            "label": {
+              "labelName": "label",
+              "label": "value"
+            }
+          }
+        },
+        {
+          "key": "label",
+          "hidden": true
+        },
+        {
+          "key": "mergeNotifyWaitTime",
+          "desc": "合并发送通知等待时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 0,
+          "max": 600000
+        }
+      ]
+    ]
+  },
+  "死值": {
+    "config": {
+      "suffix": "统计周期内一直不变表示死值"
+    },
+    "columns": [
+      [
+        {
+          "key": "period",
+          "desc": "数据获取周期",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 60,
+          "max": 599940
+        },
+        {
+          "key": "countPeriod",
+          "desc": "统计周期",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 60,
+          "max": 599940
+        },
+        {
+          "key": "mergeNotifyPoints",
+          "desc": "合并发送通知的点位",
+          "dataType": "multiple",
+          "multiplier": 60,
+          "dicStaticKey": "cftPointList",
+          "style": { "width": 300 },
+          "otherFields": {
+            "label": {
+              "labelName": "label",
+              "label": "value"
+            }
+          }
+        },
+        {
+          "key": "label",
+          "hidden": true
+        },
+        {
+          "key": "mergeNotifyWaitTime",
+          "desc": "合并发送通知等待时间",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 0,
+          "max": 600000
+        }
+      ]
+    ]
+  },
+  "监视测点": {
+    "config": {
+      "suffix": "配置需要监视的测点"
+    },
+    "columns": [
+      [
+        {
+          "key": "monitoringPoint",
+          "desc": "测点",
+          "dataType": "multiple",
+          "multiplier": 60,
+          "dicStaticKey": "cftPointList",
+          "style": { "width": 300 },
+          "otherFields": {
+            "label": {
+              "labelName": "label",
+              "label": "value"
+            }
+          }
+        },
+        { "key": "label", "hidden": true }
+      ]
+    ]
+  },
+  "通知策略配置": {
+    "config": {
+      "suffix": "通知策略配置"
+    },
+    "columns": [
+      [
+        {
+          "desc": "任务分发策略",
+          "key": "strategy",
+          "dataType": "multiple",
+          "dicStaticKey": "strategyList",
+          "allowClearKeys": ["showStrategy"]
+        },
+        {
+          "desc": "显示的任务分发策略",
+          "key": "showStrategy",
+          "dataType": "select",
+          "style": { "width": 180 },
+          "options": [],
+          "dynamicKey": "strategy",
+          "dicStaticKey": "strategyList"
+        }
+      ]
+    ]
+  }
+}

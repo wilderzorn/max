@@ -73,6 +73,8 @@ export default () => {
 
   useEffect(() => {
     const _themePath = THEME_PATH_MAP?.[global.theme] ?? THEME_PATH_MAP.light;
+    const htmlElement = window.document.querySelector('html');
+    htmlElement?.setAttribute('data-type-color', global.theme);
     setState({ themePath: _themePath });
   }, [global.theme]);
   return (
@@ -105,6 +107,10 @@ export default () => {
                 path: '/home',
               },
               {
+                name: 'testPage',
+                path: '/testPage',
+              },
+              {
                 name: 'middleware',
                 path: '/middleware',
               },
@@ -123,6 +129,14 @@ export default () => {
               {
                 name: 'historyDataQuery',
                 path: '/historyDataQuery',
+              },
+              {
+                name: 'stationInfo',
+                path: '/stationInfo',
+              },
+              {
+                name: 'FICCStatistics',
+                path: '/FICCStatistics',
               },
               {
                 name: 'childWeb',

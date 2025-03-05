@@ -17,5 +17,8 @@ export default {
     historyDataQuery: '历史数据查询',
     childWeb: '子项目',
     transition: '过渡',
+    stationInfo: '场站详情',
+    FICCStatistics: '数智统计',
+    testPage: '测试页面',
   },
 };

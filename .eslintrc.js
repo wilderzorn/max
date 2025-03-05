@@ -23,7 +23,7 @@ module.exports = {
     'no-unused-expressions': 'off',
     'no-return-assign': 'off',
     'no-underscore-dangle': 'off',
-    'no-console': 'error',
+    'no-console': 'error', // 将 console 用法标记为错误
     'no-plusplus': 'off',
     'no-return-await': 'off',
     'no-use-before-define': 'off',
@@ -37,5 +37,8 @@ module.exports = {
     // 将未使用变量的规则设置为警告而不是错误
     '@typescript-eslint/no-unused-vars': 'off',
     'no-useless-catch': 'off', // 允许catch语句中没有变量声明
+    eqeqeq: 'off', // 允许使用==和!=
+    'guard-for-in': 'off', // 允许使用for...in循环
+    'array-callback-return': 'off', // 允许数组回调函数没有return语句
   },
 };

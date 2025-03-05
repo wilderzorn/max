@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 15px;
+  overflow: hidden;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+
+    .chunk {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #7a7d7f;
+      border: 1px solid #4d4d4b;
+      border-radius: 5px;
+
+      &_left {
+        overflow: hidden;
+        font-weight: bold;
+        font-size: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis; //超出的隐藏//省略号//强制一行显示
+      }
+
+      &_del {
+        margin: 0 5px;
+      }
+
+      &_right {
+        display: flex;
+        flex: 1 1;
+        flex-wrap: wrap;
+        padding: 10px;
+        overflow: hidden;
+        border-left: 1px solid #4d4d4b;
+      }
+    }
+  }
+}
+
+.myPopover {
+  :global {
+    .ant-popover-content {
+      .ant-popover-inner {
+        .ant-popover-title {
+          border-bottom-color: transparent;
+        }
+      }
+    }
+  }
+}

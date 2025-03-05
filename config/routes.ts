@@ -48,10 +48,25 @@ export default [
             path: '/historyDataQuery',
             component: './HistoryDataQuery',
           },
-           {
+          {
             name: '策略配置',
             path: '/strategy',
             component: './Strategy',
+          },
+          {
+            name: '场站详情',
+            path: '/stationInfo',
+            component: './StationInfo',
+          },
+          {
+            name: '数智统计',
+            path: '/FICCStatistics',
+            component: './FICCStatistics',
+          },
+          {
+            name: '测试页面',
+            path: '/testPage',
+            component: './TestPage',
           },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控

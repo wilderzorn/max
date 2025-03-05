@@ -70,7 +70,7 @@ const TRTable = () => {
           dataSource={state.dataList}
           pagination={false}
           scroll={{
-            y: 918,
+            y: 870,
           }}
         />
       </div>

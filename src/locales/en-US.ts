@@ -17,5 +17,7 @@ export default {
     historyDataQuery: 'historyDataQuery',
     childWeb: 'childWeb',
     transition: 'transition',
+    stationInfo: 'stationInfo',
+    testPage: 'testPage',
   },
 };

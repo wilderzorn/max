@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+
+  &_header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #4b4b4b;
+
+    &_content {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      max-width: 100%;
+      overflow: hidden;
+      overflow-x: auto;
+
+      &_tabs {
+        .tabs {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          padding-bottom: 15px;
+          margin-right: 20px;
+          font-size: 18px;
+          font-weight: 500;
+          cursor: pointer;
+
+          &_action {
+            color: #18a0fb;
+
+            &::before {
+              position: absolute;
+              bottom: 0;
+              left: calc(50% - 8px);
+              width: 16px;
+              content: '';
+              border-bottom: 2px solid #18a0fb;
+            }
+          }
+
+          &_icon {
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        width: 70px;
+        margin-bottom: 15px;
+        font-size: 18px;
+        color: #18a0fb;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_notTabs {
+    display: flex;
+    align-items: center;
+    padding: 0 15px 15px;
+
+    &_title {
+      margin-right: 10px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+      color: var(--font);
+    }
+  }
+
+  &_content {
+    flex: 1;
+    overflow: hidden auto;
+  }
+}
+
+.header_status {
+  padding: 1px 8px;
+  font-size: 12px;
+  user-select: none;
+  border-radius: 10px;
+}

@@ -1,0 +1,306 @@
+{
+  "数据获取周期": {
+    "config": {
+      "suffix": "数据判断轮询间隔"
+    },
+    "columns": [
+      [
+        {
+          "key": "period",
+          "desc": "周期时长",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 60,
+          "max": 60000
+        }
+      ]
+    ]
+  },
+  "风机状态提报单是否剔除": {
+    "config": {
+      "suffix": "剔除有处理中状态提报单，且在受影响风机范围内的风机"
+    },
+    "columns": []
+  },
+  "是否过滤异常停机": {
+    "config": {
+      "suffix": "剔除配置时间范围内，状态仅在配置范围内的风机"
+    },
+    "columns": [
+      [
+        {
+          "key": "isFilterShutdown",
+          "dataType": "virtualTabel",
+          "desc": "是否过滤异常停机",
+          "isAdd": true,
+          "defaultValues": {
+            "model": null,
+            "asset": [],
+            "assetList": [],
+            "fanAbnormalDesc": [],
+            "label": null,
+            "statusDesc": [],
+            "lastTimeLimitStatus": null,
+            "duration": null
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "模型",
+              "key": "model",
+              "dataType": "select",
+              "style": { "width": 100 },
+              "dicStaticKey": "fanAbnormalUnit",
+              "dynamicKey": "fanModel",
+              "allowClearKeys": [
+                "asset",
+                "assetList",
+                "fanAbnormalDesc",
+                "statusDesc",
+                "label"
+              ]
+            },
+            {
+              "desc": "机组",
+              "key": "asset",
+              "dataType": "multiple",
+              "style": { "width": 200 },
+              "dicStaticKey": "fanAbnormalUnit",
+              "dynamicKey": "fanAsset",
+              "disableOtherOptions": true,
+              "otherFields": {
+                "assetList": {
+                  "assetName": "assetName",
+                  "assetNum": "assetNum",
+                  "model": "model",
+                  "eq10": "eq10"
+                }
+              },
+              "allowClearKeys": ["fanAbnormalDesc", "statusDesc", "label"]
+            },
+            { "key": "assetList", "hidden": true },
+            {
+              "desc": "状态描述",
+              "key": "fanAbnormalDesc",
+              "dataType": "multiple",
+              "style": { "width": 400 },
+              "dicStaticKey": "fanAbnormalDescList",
+              "dynamicKey": "fanAbnormalDesc",
+              "otherFields": {
+                "statusDesc": {
+                  "description": "description",
+                  "value": "value"
+                }
+              }
+            },
+            { "key": "statusDesc", "hidden": true },
+            { "key": "label", "hidden": true },
+            {
+              "desc": "距离上次状态时限",
+              "key": "lastTimeLimitStatus",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": { "width": 110 },
+              "min": 60,
+              "max": 60000,
+              "multiplier": 60
+            },
+            {
+              "desc": "持续时长",
+              "key": "duration",
+              "dataType": "int",
+              "suffix": "分钟",
+              "style": { "width": 110 },
+              "min": 0,
+              "max": 60000,
+              "multiplier": 60
+            },
+            { "dataType": "operationDel", "style": { "width": 20 } }
+          ]
+        }
+      ]
+    ]
+  },
+  "环境因素过滤": {
+    "config": {
+      "suffix": "过滤掉满足温度配置条件，且在10分钟内，存在未复归已配置的对应报文的风机（如果未选择报文，仅判断温度是否满足条件）"
+    },
+    "columns": [
+      [
+        {
+          "key": "environmentFilter",
+          "dataType": "virtualTabel",
+          "desc": "环境因素过滤",
+          "isAdd": true,
+          "defaultValues": {
+            "model": null,
+            "asset": [],
+            "assetList": [],
+            "temperatureCalc": null,
+            "temperature": null,
+            "message": []
+          },
+          "style": { "height": 130 },
+          "emptyStyle": {
+            "style": { "marginTop": 0, "marginBottom": 0 },
+            "imageStyle": { "height": 42 }
+          },
+          "columns": [
+            {
+              "desc": "模型",
+              "key": "model",
+              "dataType": "select",
+              "style": { "width": 100 },
+              "dicStaticKey": "fanAbnormalUnit",
+              "dynamicKey": "fanModel",
+              "allowClearKeys": ["asset", "assetList", "message"]
+            },
+            {
+              "desc": "机组",
+              "key": "asset",
+              "dataType": "multiple",
+              "style": { "width": 200 },
+              "dicStaticKey": "fanAbnormalUnit",
+              "dynamicKey": "fanAsset",
+              "otherFields": {
+                "assetList": {
+                  "assetName": "assetName",
+                  "assetNum": "assetNum",
+                  "model": "model",
+                  "eq10": "eq10"
+                }
+              },
+              "allowClearKeys": ["message"]
+            },
+            {
+              "desc": "温度计算条件",
+              "key": "temperatureCalc",
+              "dataType": "select",
+              "style": { "width": 80 },
+              "options": [
+                { "label": ">=", "value": ">=" },
+                { "label": "<=", "value": "<=" }
+              ],
+              "allowClear": true,
+              "dicStaticKey": "temperatureCalc",
+              "dynamicKey": "temperatureCalc"
+            },
+            {
+              "desc": "温度(℃)",
+              "key": "temperature",
+              "dataType": "int",
+              "style": { "width": 80 },
+              "min": -100,
+              "max": 100
+            },
+            {
+              "desc": "报文",
+              "key": "message",
+              "dataType": "multiple",
+              "style": { "width": 400 },
+              "dicStaticKey": "message",
+              "dynamicKey": "message"
+            },
+            { "dataType": "operationDel", "style": { "width": 20 } }
+          ]
+        }
+      ]
+    ]
+  },
+  "监测风机异常停机": {
+    "config": {
+      "suffix": "在有风情况下长时间停机的机组识别判断"
+    },
+    "columns": [
+      [
+        {
+          "key": "abnormaldowntimeExceeded",
+          "desc": "超过异常停机时长",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 0,
+          "max": 60000
+        },
+        {
+          "key": "windSpeedRange",
+          "desc": "风速区间",
+          "dataType": "numberRange",
+          "suffix": "m/s",
+          "style": { "width": 80 },
+          "min": 0,
+          "max": 100
+        },
+        {
+          "key": "power",
+          "desc": "功率",
+          "dataType": "int",
+          "suffix": "kW",
+          "style": { "width": 100 },
+          "min": 0,
+          "max": 10000
+        }
+      ]
+    ]
+  },
+  "异常停机占比": {
+    "config": {
+      "suffix": "关闭后,表示不再进行停机比例判断,在有风情况下长时间停机,无其它工作不管已经有多少台识别为异常停机均按照风机故障走。"
+    },
+    "columns": [
+      [
+        {
+          "key": "statisticalTime",
+          "desc": "统计时长",
+          "dataType": "int",
+          "suffix": "分钟",
+          "style": { "width": 100 },
+          "multiplier": 60,
+          "min": 0,
+          "max": 60000
+        },
+        {
+          "key": "failureRate",
+          "desc": "异常停机占比",
+          "dataType": "int",
+          "suffix": "%",
+          "style": { "width": 100 },
+          "min": 1,
+          "max": 100
+        }
+      ]
+    ]
+  },
+  "通知策略配置": {
+    "config": {
+      "suffix": "通知策略配置"
+    },
+    "columns": [
+      [
+        {
+          "key": "strategy",
+          "desc": "任务分发策略",
+          "dataType": "multiple",
+          "dicStaticKey": "strategyList",
+          "allowClearKeys": ["showStrategy"]
+        },
+        {
+          "key": "showStrategy",
+          "desc": "显示的任务分发策略",
+          "dataType": "select",
+          "style": { "width": 180 },
+          "options": [],
+          "dynamicKey": "strategy",
+          "dicStaticKey": "strategyList"
+        }
+      ]
+    ]
+  }
+}

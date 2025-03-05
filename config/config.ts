@@ -67,10 +67,10 @@ export default defineConfig({
     : [],
   // headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
   // 配置 <body> 中额外的 script 标签。
-  scripts: ['https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js'],
-  externals: {
-    echarts: 'echarts',
-  },
+  // scripts: ['https://unpkg.com/echarts@5.1.2/dist/echarts.js'],
+  // externals: {
+  //   echarts: 'echarts',
+  // },
   proxy,
   styledComponents: {}, // @umijs/max 内置了 styled-components 样式方案。配置开启。
   locale: {

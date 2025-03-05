@@ -1,9 +1,22 @@
 .container {
   display: flex;
-  height: 100vh;
   flex-direction: column;
+  height: 100vh;
   padding: 20px;
-  background-color: var(--bg-main);
+  overflow: hidden;
+  background-color: var(--bg);
   border-radius: 5px;
-  background-clip: content-box;
+
+  &_content {
+    flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  &_footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+  }
 }

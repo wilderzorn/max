@@ -1,0 +1,43 @@
+{
+  "风功率配置": {
+    "config": {
+      "suffix": ""
+    },
+    "columns": [
+      [
+        {
+          "key": "windPowerConfig",
+          "desc": "风功率系统配置",
+          "dataType": "multiple",
+          "style": { "width": 300 },
+          "dicStaticKey": "windPowerPredictionNameList"
+        }
+      ]
+    ]
+  },
+  "通知策略配置": {
+    "config": {
+      "suffix": "通知策略配置"
+    },
+    "columns": [
+      [
+        {
+          "desc": "任务分发策略",
+          "key": "strategy",
+          "dataType": "multiple",
+          "dicStaticKey": "strategyList",
+          "allowClearKeys": ["showStrategy"]
+        },
+        {
+          "desc": "显示的任务分发策略",
+          "key": "showStrategy",
+          "dataType": "select",
+          "style": { "width": 180 },
+          "options": [],
+          "dynamicKey": "strategy",
+          "dicStaticKey": "strategyList"
+        }
+      ]
+    ]
+  }
+}

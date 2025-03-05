@@ -13,6 +13,9 @@ declare module '*.svg' {
 
 declare module '*.jsx';
 declare module '*.js';
+declare module 'webpack-bundle-analyzer';
 interface Window {
   emitter: any;
+  publicPath: string;
+  AMap: any;
 }

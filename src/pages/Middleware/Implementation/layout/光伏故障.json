@@ -1,0 +1,88 @@
+{
+  "看板统计状态": {
+    "config": {
+      "suffix": "看板需要统计的提报单状态"
+    },
+    "columns": [
+      [
+        {
+          "key": "statisticalState",
+          "desc": "统计状态",
+          "dataType": "multiple",
+          "dicStaticKey": "statisticalStateList"
+        }
+      ]
+    ]
+  },
+  "超期": {
+    "config": {
+      "suffix": "各个等级故障超期时间配置"
+    },
+    "columns": [
+      [
+        {
+          "key": "level1FailureLimit",
+          "desc": "一级故障要求时限",
+          "dataType": "int",
+          "suffix": "小时",
+          "style": { "width": 120 },
+          "min": 3600,
+          "max": 3596400,
+          "multiplier": 3600
+        },
+        {
+          "key": "level2FailureLimit",
+          "desc": "二级故障要求时限",
+          "dataType": "int",
+          "suffix": "小时",
+          "style": { "width": 120 },
+          "min": 3600,
+          "max": 3596400,
+          "multiplier": 3600
+        },
+        {
+          "key": "level3FailureLimit",
+          "desc": "三级故障要求时限",
+          "dataType": "int",
+          "suffix": "小时",
+          "style": { "width": 120 },
+          "min": 3600,
+          "max": 3596400,
+          "multiplier": 3600
+        },
+        {
+          "key": "strategy",
+          "desc": "任务分发策略",
+          "dataType": "multiple",
+          "style": { "width": 300 },
+          "dicStaticKey": "strategyList",
+          "allowClearKeys": ["showStrategy"]
+        },
+        {
+          "key": "showStrategy",
+          "desc": "显示的任务分发策略",
+          "dataType": "select",
+          "style": { "width": 180 },
+          "options": [],
+          "dynamicKey": "strategy",
+          "dicStaticKey": "strategyList"
+        }
+      ]
+    ]
+  },
+  "明细统计状态": {
+    "config": {
+      "suffix": "明细需要统计的提报单状态"
+    },
+    "columns": [
+      [
+        {
+          "key": "statisticalState",
+          "desc": "统计状态",
+          "dataType": "multiple",
+          "dicStaticKey": "statisticalStateList"
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "预警是否处理完成": {
+    "config": {
+      "suffix": "针对EAM预警提报单,勾选提报单状态,表示该类状态的预警 提报单不再需要预警流程监控。"
+    },
+    "columns": [
+      [
+        {
+          "key": "warningIsComplete",
+          "desc": "预警告警处理完成的状态",
+          "dataType": "multiple",
+          "dicStaticKey": "warningList"
+        }
+      ]
+    ]
+  },
+  "预警等级识别任务配置": {
+    "config": {
+      "suffix": "预警等级对应的处理逻辑"
+    },
+    "columns": [
+      [
+        {
+          "key": "alertLevelTaskConfiguration",
+          "dataType": "virtualTabel",
+          "desc": "预警等级识别任务配置",
+          "isAdd": true,
+          "style": { "height": 370 },
+          "defaultValues": {
+            "level": null,
+            "overdue": null,
+            "expirationTime": null,
+            "strategy": [],
+            "showStrategy": null
+          },
+          "columns": [
+            {
+              "desc": "预警等级",
+              "key": "level",
+              "dataType": "select",
+              "style": { "width": 120 },
+              "options": [
+                { "label": "一级", "value": "一级" },
+                { "label": "二级", "value": "二级" },
+                { "label": "三级", "value": "三级" },
+                { "label": "四级", "value": "四级" }
+              ]
+            },
+            {
+              "desc": "是否超期提醒",
+              "key": "overdue",
+              "dataType": "select",
+              "style": { "width": 120 },
+              "options": [
+                { "label": "是", "value": "是" },
+                { "label": "否", "value": "否" }
+              ]
+            },
+            {
+              "desc": "超期时间",
+              "key": "expirationTime",
+              "dataType": "int",
+              "suffix": "小时",
+              "style": { "width": 120 },
+              "multiplier": 3600,
+              "disabledObj": { "key": "overdue", "values": ["是"] },
+              "min": 0,
+              "precision": 1
+            },
+            {
+              "desc": "任务分发策略",
+              "key": "strategy",
+              "dataType": "multiple",
+              "style": { "width": 300 },
+              "dicStaticKey": "strategyList",
+              "allowClearKeys": ["showStrategy"],
+              "disabledObj": { "key": "overdue", "values": ["是"] }
+            },
+            {
+              "desc": "显示的任务分发策略",
+              "key": "showStrategy",
+              "dataType": "select",
+              "style": { "width": 180 },
+              "options": [],
+              "dynamicKey": "strategy",
+              "dicStaticKey": "strategyList",
+              "disabledObj": { "key": "overdue", "values": ["是"] }
+            },
+            { "dataType": "operationDel", "style": { "width": 20 } }
+          ]
+        }
+      ]
+    ]
+  }
+}

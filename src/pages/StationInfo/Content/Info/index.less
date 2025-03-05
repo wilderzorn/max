@@ -1,0 +1,102 @@
+.info {
+  flex: 1;
+  background: var(----, rgba(36, 40, 51, 1));
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: flex 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+
+  &_unseen {
+    flex: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &_slide {
+    cursor: pointer;
+    position: absolute;
+    width: 12px;
+    height: 80px;
+    gap: 0;
+    border-radius: 0 12px 12px 0;
+    opacity: 0;
+    left: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--unnamed, rgba(78, 81, 92, 1));
+  }
+
+  .scroll_btn {
+    position: absolute;
+    background-color: var(--unnamed, rgba(78, 81, 92, 1));
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    width: 16px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+  }
+
+  .scroll_left {
+    left: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .scroll_right {
+    right: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .tab {
+    position: relative;
+    margin: 0 16px;
+    display: flex;
+    overflow-x: hidden; /* 隐藏滚动条 */
+    white-space: nowrap;
+    border-bottom: 1px solid var(----, #4e4f53);
+
+    > span {
+      padding: 16px;
+      flex-shrink: 0; /* 防止子元素收缩 */
+      cursor: pointer;
+      position: relative;
+    }
+
+    &_active {
+      color: var(---, rgba(10, 132, 255, 1));
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(---, rgba(10, 132, 255, 1));
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    padding: 16px;
+    overflow: hidden;
+  }
+}
