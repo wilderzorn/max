@@ -1,35 +1,35 @@
+import React from 'react';
 import styles from './index.less';
-import { useTRState } from '#/hooks/trHooks';
-import Strategy from './Strategy';
-import Content from './Content';
-import { TimeRangePicker } from '@/components/index.ts';
-import { DatePicker, Space } from 'antd';
-import moment from 'moment';
-const { RangePicker } = DatePicker;
+import { useTRState, useStaticState } from '#/hooks/trHooks';
+import { Mutex } from '#/utils/mutex';
+import _ from 'lodash';
+import timeout from '#/utils/timeout';
 
-const MultipleDeptStrategy = () => {
-  const [hocState, setHocState] = useTRState({
-    checkKey: '遥测量对标',
-    data: {},
+const Home = () => {
+  const staticState = useStaticState({
+    mutex: new Mutex(2),
+    resourcePool: ['Resource A', 'Resource B'],
   });
+  const [state, setState] = useTRState({});
 
-  const disabledDate = (current) => {
-    return current && current > moment().endOf('day');
+  React.useEffect(() => {
+    timeout();
+    useResource(1);
+    useResource(2);
+    useResource(3);
+  }, []);
+
+  const useResource = async (id) => {
+    await staticState.mutex.acquire(); // 请求资源
+    const resource = staticState.resourcePool.pop();
+    // console.log(`Task ${id} is using ${resource}`);
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // 模拟资源使用
+    // console.log(`Task ${id} finished using ${resource}`);
+    staticState.resourcePool.push(resource); // 释放资源
+    staticState.mutex.release(); // 释放锁
   };
 
-  return (
-    // <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-    //   <TimeRangePicker
-    //     value={[moment().subtract(7, 'days'), moment()]}
-    //     disabledDate={disabledDate}
-    //   />
-    //   <RangePicker open={true} disabledDate={disabledDate} />
-    // </div>
-    <div className={styles.container}>
-      <Strategy hocState={hocState} setHocState={setHocState} />
-      <Content hocState={hocState} setHocState={setHocState} />
-    </div>
-  );
+  return <div className={styles.container}>111</div>;
 };
 
-export default MultipleDeptStrategy;
+export default Home;

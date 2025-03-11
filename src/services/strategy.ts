@@ -1,8 +1,8 @@
-import { waitTime } from '#/utils/utils';
+import timeout from '#/utils/timeout';
 import { HttpCode } from '#/utils/contacts';
 
 export async function getAllDept() {
-  await waitTime(2000);
+  await timeout(2000);
   return {
     statusCode: HttpCode.SUCCESS,
     data: [

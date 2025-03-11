@@ -107,10 +107,6 @@ export default () => {
                 path: '/home',
               },
               {
-                name: 'testPage',
-                path: '/testPage',
-              },
-              {
                 name: 'middleware',
                 path: '/middleware',
               },

@@ -18,6 +18,5 @@ export default {
     childWeb: 'childWeb',
     transition: 'transition',
     stationInfo: 'stationInfo',
-    testPage: 'testPage',
   },
 };

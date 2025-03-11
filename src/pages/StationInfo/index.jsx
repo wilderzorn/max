@@ -4,7 +4,7 @@ import SHeader from './SHeader';
 import Content from './Content';
 import PageLoading from '#/components/PageLoading';
 import { useEffect } from 'react';
-import { waitTime } from '#/utils/utils';
+import timeout from '#/utils/timeout';
 
 const StationInfo = () => {
   const [state, setState] = useTRState({
@@ -19,7 +19,7 @@ const StationInfo = () => {
   }, []);
 
   const onFeach = async () => {
-    await waitTime(2000);
+    await timeout(2000);
     setState({
       loading: false,
       stations: [

@@ -19,6 +19,5 @@ export default {
     transition: '过渡',
     stationInfo: '场站详情',
     FICCStatistics: '数智统计',
-    testPage: '测试页面',
   },
 };

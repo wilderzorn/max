@@ -3,7 +3,7 @@ import Score from './Score';
 import Info from './Info';
 import { useState, useEffect } from 'react';
 import PageLoading from '#/components/PageLoading';
-import { waitTime } from '#/utils/utils';
+import timeout from '#/utils/timeout';
 
 const Content = ({ state, setState }) => {
   const [layout, setLayout] = useState('normal');
@@ -23,7 +23,7 @@ const Content = ({ state, setState }) => {
     const { deptNum, time } = state.params;
     if (!deptNum || !time) return;
     setState({ contentLoading: true });
-    await waitTime(2000);
+    await timeout(2000);
     setState({ contentLoading: false });
   };
 

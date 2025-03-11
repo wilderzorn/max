@@ -63,11 +63,6 @@ export default [
             path: '/FICCStatistics',
             component: './FICCStatistics',
           },
-          {
-            name: '测试页面',
-            path: '/testPage',
-            component: './TestPage',
-          },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控
           {

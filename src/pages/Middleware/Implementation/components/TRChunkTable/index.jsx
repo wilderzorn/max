@@ -10,7 +10,7 @@ import styles from './index.less';
 import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons';
 import cls from 'classnames';
 import RenderTemplate from '@/pages/Middleware/Implementation/renderTemplate.jsx';
-import { waitTime } from '#/utils/utils';
+import timeout from '#/utils/timeout';
 
 const TRChunkTable = memo(
   ({ item, disabled, onChangeValue, conentIndex, fullData }) => {
