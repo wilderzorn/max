@@ -18,9 +18,17 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom"],
+    "allowJs": true, // 允许TypeScript编译JavaScript 文件
+    "outDir": "dist" // 如果有，移除或调整为一个不同的目录
   },
-  "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts"],
+  "include": [
+    "mock/**/*",
+    "src/**/*",
+    "config/**/*",
+    ".umirc.ts",
+    "typings.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "lib",

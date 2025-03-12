@@ -76,8 +76,11 @@ const AccessPage: React.FC = () => {
   return (
     <PageContainer ghost header={{ title: '权限示例' }}>
       <MotionNumer value={state.value} floatLength={state.floatLength} />
-      <Button type="dashed" onClick={onInit}>
-        全局加载
+      <Button type="primary" onClick={() => showLoading()}>
+        开启全局加载
+      </Button>
+      <Button type="dashed" onClick={hideLoading}>
+        关闭全局加载
       </Button>
       <Button onClick={onStartAsyn}>开始异步</Button>
       <Button onClick={onStopAsyn}>停止异步</Button>

@@ -7,19 +7,16 @@
   --bg-click: rgba(10, 132, 255, 0.05);
   --bg-form: #363943;
   --bg-selected: rgba(10, 132, 255, 0.1);
-  --bd: rgba(255, 255, 255, 0.1);
+  --bd: hsla(0, 0%, 100%, 0.1);
   --bg-mask: rgba(0, 0, 0, 0.6);
-  --bg-thumb: rgb(106, 106, 106);
-
   /* 文本颜色 */
   --font: #fff;
-  --font-a60: rgba(255, 255, 255, 0.6);
-  --font-a40: rgba(255, 255, 255, 0.4);
-  --font-a26: rgba(255, 255, 255, 0.26);
-  --font-a10: rgba(255, 255, 255, 0.1);
+  --font-a60: hsla(0, 0%, 100%, 0.6);
+  --font-a40: hsla(0, 0%, 100%, 0.4);
+  --font-a26: hsla(0, 0%, 100%, 0.26);
+  --font-a10: hsla(0, 0%, 100%, 0.1);
   --font-invert: #000;
   --font-white: #fff;
-
   /* 按钮色 */
   --btn: #0a84ff;
   --btn-hover: #3d9eff;
@@ -29,7 +26,6 @@
   --btn2-active: #41444d;
   --btn-disabled: #353843;
   --tab-active: #4e515c;
-
   /* 主题色&功能色 */
   --base: #0a84ff;
   --base-bg: #001933;
@@ -41,8 +37,9 @@
   --warn-bg: #2b1e0a;
   --note: #ffd60a;
   --note-bg: #262108;
+  --tag: #63e6e2;
+  --tag-bg: #051f1e;
   --status-bg: #1a1a1a;
-
   /* 分类图表色 */
   ---1: #0a84ff;
   ---2: #64d2ff;
@@ -54,12 +51,8 @@
   ---8: #63e6e2;
   ---9: #bf5af2;
   ---10: #ac8e68;
-  /* 列表 */
-  --table-row-bg1: #222629;
-  --table-row-bg2: #25292c;
-  --table-border-color: #5a5a5a4a;
-  --table-hover-bg: #24445b;
-  /* 背景色 */
-  --faultPopBg: linear-gradient(180deg, #662323 0%, #242833 100%);
-  --alertPopBg: linear-gradient(180deg, #664523 0%, #242833 100%);
+  ---11: #ff6482;
+  ---12: #32de4b;
+  --faultPopBg: linear-gradient(180deg, #662323, #242833);
+  --alertPopBg: linear-gradient(180deg, #664523, #242833);
 }
