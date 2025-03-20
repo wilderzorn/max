@@ -1,5 +1,5 @@
 import abortableDelay from '#/utils/abortableDelay';
-import applyTheme from '#/utils/applyTheme';
+import applyTheme from '#/constants/applyTheme';
 import { setAuthorization } from '#/utils/authority';
 import emitter from '#/utils/emitter';
 import { useStaticState, useTRState } from '#/hooks/trHooks';
