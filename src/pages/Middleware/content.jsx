@@ -2,7 +2,7 @@ import empty from '#/assets/empty.svg';
 import darkError from '#/assets/img_dark_error.png';
 import PageEmpty from '#/components/PageEmpty';
 import PageLoading from '#/components/PageLoading';
-import { HttpCode } from '#/utils/contacts';
+import { HttpCode } from '#/resource/contacts';
 import { useStaticState, useTRState } from '#/hooks/trHooks';
 import orderMap from '@/pages/Middleware/Implementation/layout';
 import auxiliary from '@/pages/Middleware/auxiliary';

@@ -1,5 +1,5 @@
 import useNotice from '#/hooks/useNotice';
-import { AlertResult } from '#/utils/contacts';
+import { AlertResult } from '#/resource/contacts';
 import { useTRState } from '#/hooks/trHooks';
 import { Button, Form, Input, Modal, Select } from 'antd';
 import Config from './config';

@@ -1,5 +1,5 @@
 // 运行时配置
-import request from '#/constants/defineRequest';
+import request from '#/resource/defineRequest';
 import { defineApp, history, useModel } from '@umijs/max';
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化

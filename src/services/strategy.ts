@@ -1,5 +1,5 @@
 import timeout from '#/utils/timeout';
-import { HttpCode } from '#/utils/contacts';
+import { HttpCode } from '#/resource/contacts';
 
 export async function getAllDept() {
   await timeout(2000);
