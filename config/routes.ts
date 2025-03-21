@@ -29,14 +29,9 @@ export default [
             component: './Home',
           },
           {
-            name: '中间件',
-            path: '/middleware',
-            component: './Middleware',
-          },
-          {
-            name: '权限演示',
-            path: '/access',
-            component: './Access',
+            name: '弹窗演示',
+            path: '/popupDemo',
+            component: './PopupDemo',
           },
           {
             name: 'CRUD 示例',
@@ -52,16 +47,6 @@ export default [
             name: '策略配置',
             path: '/strategy',
             component: './Strategy',
-          },
-          {
-            name: '场站详情',
-            path: '/stationInfo',
-            component: './StationInfo',
-          },
-          {
-            name: '数智统计',
-            path: '/FICCStatistics',
-            component: './FICCStatistics',
           },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控

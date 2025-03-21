@@ -10,13 +10,11 @@ export default {
   },
   menu: {
     home: 'home',
-    middleware: 'middleware',
     strategy: 'strategy',
-    access: 'access',
+    popupDemo: 'popupDemo',
     table: 'table',
     historyDataQuery: 'historyDataQuery',
     childWeb: 'childWeb',
     transition: 'transition',
-    stationInfo: 'stationInfo',
   },
 };

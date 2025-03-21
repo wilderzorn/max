@@ -107,17 +107,14 @@ export default () => {
                 path: '/home',
               },
               {
-                name: 'middleware',
-                path: '/middleware',
+                name: 'popupDemo',
+                path: '/popupDemo',
               },
               {
                 name: 'strategy',
                 path: '/strategy',
               },
-              {
-                name: 'access',
-                path: '/access',
-              },
+
               {
                 name: 'table',
                 path: '/table',
@@ -125,14 +122,6 @@ export default () => {
               {
                 name: 'historyDataQuery',
                 path: '/historyDataQuery',
-              },
-              {
-                name: 'stationInfo',
-                path: '/stationInfo',
-              },
-              {
-                name: 'FICCStatistics',
-                path: '/FICCStatistics',
               },
               {
                 name: 'childWeb',
