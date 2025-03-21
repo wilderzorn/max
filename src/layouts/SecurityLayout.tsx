@@ -1,6 +1,5 @@
 import { getAuthorization } from '#/utils/authority';
 import { Navigate, Outlet } from '@umijs/max';
-import React from 'react';
 
 const SecurityLayout = () => {
   const token = getAuthorization();
