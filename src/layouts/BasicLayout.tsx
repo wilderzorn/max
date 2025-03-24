@@ -120,8 +120,8 @@ export default () => {
                 path: '/table',
               },
               {
-                name: 'historyDataQuery',
-                path: '/historyDataQuery',
+                name: 'queryHistoryData',
+                path: '/queryHistoryData',
               },
               {
                 name: 'childWeb',

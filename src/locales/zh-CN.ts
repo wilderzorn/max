@@ -13,7 +13,7 @@ export default {
     strategy: '策略配置',
     popupDemo: '弹窗演示',
     table: '虚拟列表',
-    historyDataQuery: '历史数据查询',
+    queryHistoryData: '历史数据查询',
     childWeb: '子项目',
     transition: '过渡',
   },

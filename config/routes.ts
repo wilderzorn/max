@@ -40,8 +40,8 @@ export default [
           },
           {
             name: '历史数据查询',
-            path: '/historyDataQuery',
-            component: './HistoryDataQuery',
+            path: '/queryHistoryData',
+            component: './QueryHistoryData',
           },
           {
             name: '策略配置',

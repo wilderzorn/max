@@ -13,7 +13,7 @@ export default {
     strategy: 'strategy',
     popupDemo: 'popupDemo',
     table: 'table',
-    historyDataQuery: 'historyDataQuery',
+    queryHistoryData: 'queryHistoryData',
     childWeb: 'childWeb',
     transition: 'transition',
   },
