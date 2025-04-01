@@ -96,10 +96,11 @@ const AccessPage: React.FC = () => {
     } else {
       const res = await notice.open(Business, { dataSlide });
       if (res.index !== 1) return;
-      await staticState.db[type](STORE_NAME, {
-        id: s16(),
+      const data = {
         ...(res?.values ?? {}),
-      });
+        ...(type === 'add' ? { id: s16() } : {}),
+      };
+      await staticState.db[type](STORE_NAME, data);
     }
     onFeachData();
     message.success('操作成功');
