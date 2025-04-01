@@ -1,8 +1,3 @@
-import { useStaticState, useTRState } from '#/hooks/trHooks';
-import { useModel } from '@umijs/max';
-import { Checkbox } from 'antd';
-import cls from 'classnames';
-import { useEffect, useRef } from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -11,8 +6,14 @@ import {
 } from 'react-virtualized';
 import { columns, columnsRatio } from './helper';
 import styles from './index.less';
+import { useStaticState, useTRState } from '#/hooks/trHooks';
+import { useModel } from '@umijs/max';
+import { Checkbox } from 'antd';
+import { useEffect, useRef } from 'react';
+import cls from 'classnames';
+import TREmpty from '#/components/TREmpty';
 
-const Virtual = ({ dataList }) => {
+export default ({ dataList, operationalData }) => {
   const { global } = useModel('global');
   const gridRef = useRef<any>(null);
   const staticState = useStaticState({
@@ -121,10 +122,13 @@ const Virtual = ({ dataList }) => {
     return <div>{columnSlide.title}</div>;
   };
 
-  const onContentRender = (columnIndex, item) => {
+  const onContentRender = (
+    columnIndex: number,
+    item: { [x: string]: any; id: any },
+  ) => {
     if (columnIndex === 0) {
       const idVal = item.id;
-      let arr = state.checkList;
+      let arr: any = state.checkList;
       return (
         <Checkbox
           checked={arr.includes(idVal)}
@@ -160,7 +164,7 @@ const Virtual = ({ dataList }) => {
               <a
                 key={j.key}
                 style={{ marginRight: '8px' }}
-                // onClick={() => onHandleSlie(j.key, item)}
+                onClick={() => operationalData(j.key, item)}
               >
                 {j.label}
               </a>
@@ -181,6 +185,16 @@ const Virtual = ({ dataList }) => {
 
   return (
     <div className={styles.table}>
+      {!dataList || dataList.length === 0 ? (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+          }}
+        >
+          <TREmpty message={'暂无数据'} />
+        </div>
+      ) : null}
       <AutoSizer>
         {({ height, width }) => {
           return (
@@ -222,4 +236,3 @@ const Virtual = ({ dataList }) => {
     </div>
   );
 };
-export default Virtual;

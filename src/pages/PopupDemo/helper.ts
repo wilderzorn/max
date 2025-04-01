@@ -23,7 +23,14 @@ export const columns = [
     ellipsis: true,
   },
   {
-    dataIndex: 'name',
+    dataIndex: 'id',
+    title: 'id',
+    filter: true,
+    flex: 1,
+    ellipsis: true,
+  },
+  {
+    dataIndex: 'username',
     title: '名称',
     filter: true,
     flex: 1,
@@ -37,22 +44,25 @@ export const columns = [
     ellipsis: true,
   },
   {
+    dataIndex: 'type',
+    title: '描述',
+    filter: true,
+    flex: 1,
+    ellipsis: true,
+  },
+  {
     dataIndex: 'btns',
     title: '操作',
     width: 200,
     ellipsis: true,
     btns: [
       {
-        label: '查看',
-        key: 'asset_look',
-      },
-      {
         label: '编辑',
-        key: 'asset_edit',
+        key: 'put',
       },
       {
         label: '删除',
-        key: 'asset_delete',
+        key: 'delete',
       },
     ],
   },

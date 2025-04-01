@@ -1,14 +1,14 @@
 /*
  * @Autor: zhangzhihao
  * @Date: 2024-07-03 14:24:15
- * @FilePath: /src/pages/Strategy/index.tsx
+ * @FilePath: /src/pages/Relationship/index.tsx
  * @Description: 策略配置
  */
 import React from 'react';
 import graphInstance, { onRegisterGraph } from './extend';
 import styles from './index.less';
 
-const Strategy = () => {
+const Relationship = () => {
   const ref: any = React.useRef(null);
 
   React.useEffect(() => {
@@ -51,4 +51,4 @@ const Strategy = () => {
 
   return <div className={styles.container} ref={ref} />;
 };
-export default Strategy;
+export default Relationship;

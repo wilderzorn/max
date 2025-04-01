@@ -10,9 +10,8 @@ export default {
   },
   menu: {
     home: 'home',
-    strategy: 'strategy',
+    relationship: 'relationship',
     popupDemo: 'popupDemo',
-    table: 'table',
     queryHistoryData: 'queryHistoryData',
     childWeb: 'childWeb',
     transition: 'transition',

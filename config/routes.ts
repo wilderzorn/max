@@ -34,19 +34,14 @@ export default [
             component: './PopupDemo',
           },
           {
-            name: 'CRUD 示例',
-            path: '/table',
-            component: './Table',
-          },
-          {
             name: '历史数据查询',
             path: '/queryHistoryData',
             component: './QueryHistoryData',
           },
           {
             name: '策略配置',
-            path: '/strategy',
-            component: './Strategy',
+            path: '/relationship',
+            component: './Relationship',
           },
           { path: '/childWeb', component: './Micro' }, // 运营监控
           { path: '/transition', component: './Micro' }, // 运营监控

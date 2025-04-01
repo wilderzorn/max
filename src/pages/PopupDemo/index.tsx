@@ -1,4 +1,3 @@
-import TREmpty from '#/components/TREmpty';
 import useAlert from '#/hooks/useAlert';
 import useMessage from '#/hooks/useMessage';
 import useNotice from '#/hooks/useNotice';
@@ -6,11 +5,17 @@ import usePLoading from '#/hooks/usePLoading';
 import abortableDelay from '#/utils/abortableDelay';
 import timeout from '#/utils/timeout';
 import { useStaticState, useTRState } from '#/hooks/trHooks';
-import { PageContainer } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import React, { useEffect } from 'react';
 import Business from './business';
 import MotionNumer from '#/components/MotionNumer';
+import IndexedDBWrapper from '#/utils/indexedDBWrapper';
+import Table from './table';
+import styles from './index.less';
+import { s16 } from '#/utils/utils';
+import { randomInt } from 'es-toolkit';
+
+const STORE_NAME = 'users';
 
 const AccessPage: React.FC = () => {
   const [alert, AlertContext] = useAlert();
@@ -20,19 +25,36 @@ const AccessPage: React.FC = () => {
 
   const staticState = useStaticState({
     controller: null,
+    db: new IndexedDBWrapper('myAppDB', 1, [
+      {
+        name: STORE_NAME,
+        keyPath: 'id',
+        indexes: [{ name: 'username', keyPath: 'username', unique: true }],
+      },
+    ]),
   });
   const [state, setState] = useTRState({
     value: 0,
     floatLength: 0,
+    dataList: [],
   });
 
   useEffect(() => {
+    const onInit = async () => {
+      await staticState.db.connect();
+      onFeachData();
+    };
     onInit();
+    return () => {
+      staticState.db.close();
+    };
   }, []);
 
-  const onInit = async () => {
-    showLoading('123123');
+  const onFeachData = async () => {
+    showLoading('请求中');
     await timeout(1000);
+    const res = await staticState.db.getAll(STORE_NAME);
+    setState({ dataList: res ?? [] });
     hideLoading();
   };
 
@@ -47,8 +69,8 @@ const AccessPage: React.FC = () => {
       await abortableDelay(2000, { signal: staticState.controller.signal });
       staticState.controller = null;
       setState(() => ({
-        value: getRandomNumber(1, 10000),
-        floatLength: getRandomNumber(1, 4),
+        value: randomInt(1, 10000),
+        floatLength: randomInt(1, 4),
       }));
       // eslint-disable-next-line no-console
       console.log('请求结束');
@@ -63,49 +85,51 @@ const AccessPage: React.FC = () => {
     staticState.controller?.abort();
   };
 
-  const onIsStart = async () => {
-    const index = await alert.confirm({ title: '这个是阿萨发给的方法' });
-    if (index !== 1) return;
-  };
-
-  const onShowModal = async () => {
-    const res = await notice.open(Business);
-    if (res.index !== 1) return;
+  const operationalData = async (
+    type: 'add' | 'put' | 'delete' = 'add',
+    dataSlide: { id?: IDBValidKey } = {},
+  ) => {
+    if (type === 'delete') {
+      const index = await alert.confirm({ title: '是否确定删除' });
+      if (index !== 1) return;
+      staticState.db.deleteByKey(STORE_NAME, dataSlide.id as IDBValidKey);
+    } else {
+      const res = await notice.open(Business, { dataSlide });
+      if (res.index !== 1) return;
+      await staticState.db[type](STORE_NAME, {
+        id: s16(),
+        ...(res?.values ?? {}),
+      });
+    }
+    onFeachData();
+    message.success('操作成功');
   };
 
   return (
-    <PageContainer ghost header={{ title: '权限示例' }}>
-      <MotionNumer value={state.value} floatLength={state.floatLength} />
-      <Button type="primary" onClick={() => showLoading()}>
-        开启全局加载
-      </Button>
-      <Button type="dashed" onClick={hideLoading}>
-        关闭全局加载
-      </Button>
-      <Button onClick={onStartAsyn}>开始异步</Button>
-      <Button onClick={onStopAsyn}>停止异步</Button>
-      <Button onClick={onIsStart}>alert</Button>
-      <Button
-        onClick={() => {
-          message.info('messsage');
-        }}
-      >
-        messsage
-      </Button>
-      <Button onClick={onShowModal} type="primary">
-        弹窗
-      </Button>
-      <TREmpty />
+    <div className={styles.container}>
+      <div>
+        <MotionNumer value={state.value} floatLength={state.floatLength} />
+        <Button type="primary" onClick={() => showLoading()}>
+          开启全局加载
+        </Button>
+        <Button type="dashed" onClick={hideLoading}>
+          关闭全局加载
+        </Button>
+        <Button onClick={onStartAsyn}>开始异步</Button>
+        <Button onClick={onStopAsyn}>停止异步</Button>
+      </div>
+      <div>
+        <Button type="dashed" onClick={() => operationalData()}>
+          新增
+        </Button>
+      </div>
+      <Table dataList={state.dataList} operationalData={operationalData} />
       {AlertContext}
       {MessageContext}
       {NoticeContext}
       {LoadingProvider}
-    </PageContainer>
+    </div>
   );
 };
 
 export default AccessPage;
-
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}

@@ -111,13 +111,8 @@ export default () => {
                 path: '/popupDemo',
               },
               {
-                name: 'strategy',
-                path: '/strategy',
-              },
-
-              {
-                name: 'table',
-                path: '/table',
+                name: 'relationship',
+                path: '/relationship',
               },
               {
                 name: 'queryHistoryData',
