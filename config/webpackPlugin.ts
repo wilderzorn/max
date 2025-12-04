@@ -1,11 +1,10 @@
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-
 const webpackPlugin = (config: any): any => {
   const isProduction = process.env.NODE_ENV === 'production';
 
   config.mode(isProduction ? 'production' : 'development');
   config.devtool(isProduction ? 'hidden-source-map' : 'eval-source-map');
 
+  // 配置代码分割
   config.optimization.splitChunks({
     chunks: 'all',
     minSize: 10000,
@@ -38,16 +37,16 @@ const webpackPlugin = (config: any): any => {
     },
   });
 
-  // 开发环境下启用 webpack-bundle-analyzer
-  if (!isProduction && process.env.ANALYZE) {
-    config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin, [
-      {
-        analyzerMode: 'server',
-        analyzerHost: '127.0.0.1',
-        analyzerPort: 8888,
-      },
-    ]);
-  }
+  config.module
+    .rule('worker')
+    .test(/\.worker\.(js|ts)$/) // 支持 js 和 ts
+    .use('worker-loader')
+    .loader('worker-loader')
+    .options({
+      inline: 'fallback',
+      filename: '[name].js',
+    })
+    .end();
 
   return config;
 };

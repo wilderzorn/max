@@ -1,7 +1,8 @@
 {
   "private": true,
-  "author": "wilderzorn <wilderzorn@163.com>",
+  "author": "wilderzorn",
   "name": "maxweb",
+  "type": "module",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 max build",
     "build": "cross-env UMI_ENV=release max build",
@@ -16,8 +17,10 @@
     "start": "cross-env CLIENT_ENV=pre max dev",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:prettier:fix": "prettier -c --write \"src/**/*\"",
-    "lint": "max lint && npm run lint:prettier",
-    "lint:fix": "max lint --fix && npm run lint:prettier:fix",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:fix": "npm run lint:eslint:fix && npm run lint:prettier:fix",
+    "lint:eslint": "eslint src --ext .ts,.tsx,.js,.jsx --config eslint.config.js",
+    "lint:eslint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --config eslint.config.js --fix",
     "precommit:fix": "npm run lint:fix",
     "clean": "npm cache clean -f"
   },
@@ -25,8 +28,11 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,less}": [
-      "max lint"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --config eslint.config.js --fix"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix"
     ]
   },
   "dependencies": {
@@ -34,7 +40,7 @@
     "@ant-design/icons": "^5.5.1",
     "@ant-design/pro-components": "^2.7.19",
     "@antv/g6": "4.8.24",
-    "@umijs/max": "^4.4.6",
+    "@umijs/max": "^4.4.11",
     "ahooks": "^3.8.1",
     "antd": "^5.24.2",
     "antd-style": "^3.7.0",
@@ -43,33 +49,47 @@
     "echarts": "5.1.2",
     "emittery": "^1.0.3",
     "es-toolkit": "^1.34.1",
+    "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "mqtt": "^5.10.4",
+    "pinyin-pro": "^3.27.0",
     "rc-notification": "^5.6.2",
     "rc-tween-one": "^3.0.6",
     "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-virtualized": "^9.22.5"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/runtime": "^7.27.6",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@eslint/js": "^9.39.1",
+    "@types/lodash": "^4.17.16",
     "@types/mqtt": "^2.5.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@types/react-virtualized": "^9.21.30",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "@umijs/plugins": "^4.4.11",
     "cross-env": "^7.0.3",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.3.0",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.5.2",
     "typescript": "^5.8.2",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "worker-loader": "^3.0.8"
   },
   "engines": {
     "node": ">=18"
   },
   "volta": {
-    "node": "20.19.0"
+    "node": "22.21.1"
   }
 }

@@ -1,8 +1,9 @@
-import abortableDelay from '#/utils/abortableDelay';
+import { useStaticState, useTRState } from '#/hooks/trHooks';
 import applyTheme from '#/resource/applyTheme';
+import abortableDelay from '#/utils/abortableDelay';
 import { setAuthorization } from '#/utils/authority';
 import emitter from '#/utils/emitter';
-import { useStaticState, useTRState } from '#/hooks/trHooks';
+import { DEFAULT_NAME } from '@/constants';
 import { PoweroffOutlined } from '@ant-design/icons';
 import type { MenuDataItem } from '@ant-design/pro-components';
 import { ProLayout } from '@ant-design/pro-components';
@@ -14,25 +15,11 @@ import {
   useLocation,
   useModel,
 } from '@umijs/max';
-import { useExternal } from 'ahooks';
 import { Button, ColorPicker, Divider, Flex, Switch } from 'antd';
 import { ThemeProvider } from 'antd-style';
 import { Fragment, useEffect, useRef } from 'react';
 import logo from '../../public/logo.png';
 import styles from './index.less';
-import { DEFAULT_NAME } from '@/constants';
-
-const publicPath = `${(window as any)?.publicPath ?? '/'}`;
-const THEME_PATH = {
-  light: publicPath + 'theme/light.css', // 亮色
-  dark: publicPath + 'theme/dark.css', // 暗色
-};
-const THEME_PATH_MAP = {
-  light: THEME_PATH.light, // 亮色
-  dark: THEME_PATH.dark, // 暗色
-  red: THEME_PATH.light, // 亮色
-  green: THEME_PATH.dark, // 暗色
-};
 
 export default () => {
   const intl = useIntl();
@@ -41,9 +28,6 @@ export default () => {
   const { setGlobal, global } = useModel('global');
   const staticState = useStaticState({
     collapsedTimer: null,
-  });
-  const [state, setState] = useTRState({
-    themePath: '',
   });
 
   useEffect(() => {
@@ -69,14 +53,11 @@ export default () => {
     }, 200);
   }, [global.collapsed]);
 
-  useExternal(state.themePath);
-
   useEffect(() => {
-    const _themePath = THEME_PATH_MAP?.[global.theme] ?? THEME_PATH_MAP.light;
     const htmlElement = window.document.querySelector('html');
     htmlElement?.setAttribute('data-type-color', global.theme);
-    setState({ themePath: _themePath });
   }, [global.theme]);
+
   return (
     <ThemeProvider
       appearance={global.theme}
@@ -84,7 +65,7 @@ export default () => {
     >
       <ProLayout
         siderWidth={200} // 菜单收起宽度是无法自定义
-        locale={global.locale}
+        locale={global.locale as 'zh-CN' | 'en-US'}
         pure={false}
         breakpoint={false}
         collapsed={global.collapsed}

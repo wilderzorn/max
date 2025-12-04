@@ -48,12 +48,12 @@ export default defineConfig({
   //设置哪些模块不打包，转而通过 <script> 或其他方式引入，通常需要搭配 headScripts 配置使用。
   ...cig,
   chainWebpack: webpackPlugin,
-  // '@umijs/plugins/dist/initial-state',
-  // '@umijs/plugins/dist/model',
   request: {},
-  // plugins: ['@umijs/plugins/dist/request'],
   dva: {},
   qiankun: MICRO_CIG,
+  // 添加 esbuild 配置
+  // esbuildMinifyIIFE: true, // 这是关键配置
+  // 优化构建配置
   mfsu: {
     strategy: 'normal',
   },
@@ -65,12 +65,7 @@ export default defineConfig({
   headScripts: IS_PRODUCTION
     ? ['window.publicPath = window.resourceBaseUrl || "/web/"']
     : [],
-  // headScripts: IS_PRODUCTION ? ['window.publicPath = window.resourceBaseUrl || "/web/"'] : [],
-  // 配置 <body> 中额外的 script 标签。
-  // scripts: ['https://unpkg.com/echarts@5.1.2/dist/echarts.js'],
-  // externals: {
-  //   echarts: 'echarts',
-  // },
+  externals: {},
   proxy,
   styledComponents: {}, // @umijs/max 内置了 styled-components 样式方案。配置开启。
   locale: {

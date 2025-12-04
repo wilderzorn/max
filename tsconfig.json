@@ -2,14 +2,20 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "noImplicitAny": false,
+    "noImplicitAny": false, // 允许隐式 any
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "importHelpers": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "strict": true,
+    "strict": true, // 启用严格模式
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false, // 关闭严格属性初始化
+    "noImplicitThis": true,
+    "alwaysStrict": true,
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
@@ -19,15 +25,17 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "types": ["react", "react-dom"],
-    "allowJs": true, // 允许TypeScript编译JavaScript 文件
-    "outDir": "dist" // 如果有，移除或调整为一个不同的目录
+    "allowJs": true,
+    "outDir": "dist"
   },
   "include": [
     "mock/**/*",
     "src/**/*",
     "config/**/*",
     ".umirc.ts",
-    "typings.d.ts"
+    "typings.d.ts", 
+    "eslint.config.js",
+    ".prettierrc.cjs"
   ],
   "exclude": [
     "node_modules",

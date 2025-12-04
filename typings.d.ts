@@ -13,9 +13,14 @@ declare module '*.svg' {
 
 declare module '*.jsx';
 declare module '*.js';
-declare module 'webpack-bundle-analyzer';
 interface Window {
   emitter: any;
   publicPath: string;
   AMap: any;
+}
+declare module '*.worker.js' {
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+  export default WebpackWorker;
 }

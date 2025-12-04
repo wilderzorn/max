@@ -8,8 +8,4 @@ export async function onLogin(data): Promise<any> {
       });
     }, 3000);
   });
-  // return await request(`/xxxxxxxxx`, {
-  //   method: 'POST',
-  //   data,
-  // });
 }

@@ -5,6 +5,7 @@
 **/*.html
 package.json
 tsconfig.json
+tsconfig.eslint.json
 .umi
 .umi-production
 .umi-test
