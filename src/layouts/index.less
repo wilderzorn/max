@@ -1,13 +1,90 @@
 .layout {
-  :global {
-    .ant-layout-sider {
+  min-height: 100vh;
+
+  .antLayout {
+    min-height: 100vh;
+  }
+
+  .antLayoutSider {
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    border-right: 1px solid var(--bd);
+    :global {
       .ant-layout-sider-children {
         background-color: var(--bg);
+        display: flex;
+        flex-direction: column;
       }
     }
-    .ant-pro-layout-container {
-      .ant-layout-content {
-        height: 100vh;
+  }
+
+  .antMenu {
+    border-right: 0;
+    margin-top: 8px;
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg);
+    border: none !important;
+  }
+
+  .logoContainer {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--bd);
+
+    .logo {
+      height: 40px;
+      width: 40px;
+      margin-right: 12px;
+    }
+
+    .title {
+      color: var(--font);
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      white-space: nowrap;
+    }
+  }
+
+  .footerContainer {
+    padding: 16px;
+    border-top: 1px solid var(--bd);
+    background: inherit;
+  }
+
+  .collapseButton {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  :global {
+    .ant-layout {
+      background: var(--bg);
+    }
+
+    .ant-layout-content {
+      overflow-y: auto;
+    }
+
+    .ant-layout-sider-collapsed {
+      .logoContainer {
+        justify-content: center;
+        padding: 0;
+        .logo {
+          margin-right: 0;
+        }
+        .title {
+          display: none;
+        }
       }
     }
   }

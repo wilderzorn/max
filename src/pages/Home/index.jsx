@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './index.less';
-import { useTRState, useStaticState } from '#/hooks/trHooks';
+import { useTRState, useStaticState } from '#/index';
 import _ from 'lodash';
 import { useModel } from '@umijs/max';
 import useAlert from '#/hooks/useAlert';
-// import WindTurbine from '@/components/WindTurbine';
 import { getPinyin } from './helper';
-import { TRVirtualTable } from '#/components';
+import { TRVirtualTable } from '#/index';
 
 const Home = () => {
   const [alert, AlertContext] = useAlert();
@@ -24,7 +23,16 @@ const Home = () => {
           <div>原始文本: "你好世界"</div>
           <div>{getPinyin(bane, '')}</div>
           <div>{getPinyin(bane, 'none')}</div>
-          <div>{getPinyin(bane, 'first')}</div>
+          <div
+            onClick={() =>
+              alert.success({
+                title: '首字母',
+                content: getPinyin(bane, 'first'),
+              })
+            }
+          >
+            {getPinyin(bane, 'first')}
+          </div>
         </div>
         <TRVirtualTable
           headerHeight={40}

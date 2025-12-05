@@ -1,5 +1,6 @@
 import React from 'react';
-import { useResize, useStaticState } from '#/hooks/trHooks';
+import { useStaticState } from '#/index';
+import useResize from '#/hooks/useResize';
 import { ArrowsAltOutlined, ShrinkOutlined } from '@ant-design/icons';
 import { useSize } from 'ahooks';
 import styles from './index.less';

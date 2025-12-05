@@ -8,39 +8,42 @@
 }
 
 .ant-table-container {
-  .ant-table-header {
+  .ant-table-thead {
     .ant-table-cell {
-      background: #ffffff0d;
+      background: var(--bg-form);
     }
   }
   // --------虚拟列表--------
   .ant-table-tbody-virtual-holder-inner
-    > .ant-table-row:nth-child(even)
-    > .ant-table-cell {
-    background: #ffffff0d;
-  }
-
-  .ant-table-tbody-virtual-holder-inner
     > .ant-table-row:nth-child(odd)
     > .ant-table-cell {
-    background: #222629;
+    background: var(--bg-main);
+  }
+  .ant-table-tbody-virtual-holder-inner
+    > .ant-table-row:nth-child(even)
+    > .ant-table-cell {
+    background: var(--bg-zebra);
   }
 
   .ant-table-tbody-virtual-holder-inner
     > .ant-table-row:hover
     > .ant-table-cell {
-    background: var(--bg-selected);
+    background: var(--bg-RowHover);
   }
   // --------正常列表--------
+  .ant-table-tbody > tr.ant-table-row {
+    font-size: 12px;
+    line-height: 20px;
+  }
   .ant-table-tbody > tr.ant-table-row:nth-child(odd) > td {
-    background: #222629;
+    background: var(--bg-main);
   }
 
   .ant-table-tbody > tr.ant-table-row:nth-child(even) > td {
-    background: #ffffff0d;
+    background: var(--bg-zebra);
   }
 
   .ant-table-tbody > tr.ant-table-row:hover > td {
-    background: var(--bg-selected);
+    background: var(--bg-RowHover);
   }
 }

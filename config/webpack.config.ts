@@ -1,8 +1,10 @@
-const webpackPlugin = (config: any): any => {
+const webpackPlugin = (
+  config: any,
+): ((...args: any[]) => unknown) | undefined => {
   const isProduction = process.env.NODE_ENV === 'production';
 
   config.mode(isProduction ? 'production' : 'development');
-  config.devtool(isProduction ? 'hidden-source-map' : 'eval-source-map');
+  config.devtool(isProduction ? 'hidden-source-map' : 'source-map');
 
   // 配置代码分割
   config.optimization.splitChunks({

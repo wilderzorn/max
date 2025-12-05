@@ -1,5 +1,5 @@
 import { AlertResult } from '#/resource/contacts';
-import { useTRState } from '#/hooks/trHooks';
+import { useTRState } from '#/index';
 import { Form, Input, Modal, Select } from 'antd';
 import React from 'react';
 

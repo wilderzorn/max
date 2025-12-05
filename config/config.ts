@@ -1,7 +1,7 @@
 // https://umijs.org/docs/api/config
 import { defineConfig } from '@umijs/max';
 import routes from './routes';
-import webpackPlugin from './webpackPlugin';
+import webpackPlugin from './webpack.config';
 const { NODE_ENV, CLIENT_ENV, TERMINAL_ENV } = process.env;
 import { MICRO_CIG } from './micro';
 import proxy from './proxy';
@@ -14,7 +14,8 @@ const cig: any = {};
 export default defineConfig({
   base: IS_PRODUCTION ? `${DQ_BASE}` : '/', // 在非根目录下部署 umi 项目时，你可以使用 base 配置
   antd: {},
-  clickToComponent: {}, // 点击组件跳转至编辑器源码位置
+  // XXX 被package.json中type="module" 影响，导致clickToComponent 失效
+  // clickToComponent: {}, //  点击组件跳转至编辑器源码位置
   model: {},
   // access 插件依赖 initial State 所以需要同时开启
   access: {},
@@ -28,15 +29,11 @@ export default defineConfig({
   // publicPath: `${DQ_BASE}`,
   hash: true,
   history: {
-    // type: 'browser',
     type: 'hash',
   },
   mountElementId: 'root-master', // 配置 react 组件树渲染到 HTML 中的元素 id。
-  // theme: { 'primary-color': defaultSettings.primaryColor},
   title: false,
   ignoreMomentLocale: true, //忽略 moment 的 locale 文件，用于减少产物尺寸。
-  // qiankun: {}, // 配置 qiankun 的一些配置
-  // 开启 build 时生成额外的 manifest 文件，用于描述产物。
   manifest: {
     basePath: '/',
   },
@@ -51,8 +48,6 @@ export default defineConfig({
   request: {},
   dva: {},
   qiankun: MICRO_CIG,
-  // 添加 esbuild 配置
-  // esbuildMinifyIIFE: true, // 这是关键配置
   // 优化构建配置
   mfsu: {
     strategy: 'normal',

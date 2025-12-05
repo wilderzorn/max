@@ -4,13 +4,12 @@ import useNotice from '#/hooks/useNotice';
 import usePLoading from '#/hooks/usePLoading';
 import abortableDelay from '#/utils/abortableDelay';
 import timeout from '#/utils/timeout';
-import { useStaticState, useTRState } from '#/hooks/trHooks';
-import { Button } from 'antd';
+import { useStaticState, useTRState } from '#/index';
+import { Button, Table } from 'antd';
 import React, { useEffect } from 'react';
 import Business from './business';
 import MotionNumer from '#/components/MotionNumer';
 import IndexedDBWrapper from '#/utils/indexedDBWrapper';
-import Table from './table';
 import styles from './index.less';
 import { s16 } from '#/utils/utils';
 import { randomInt } from 'es-toolkit';
@@ -124,7 +123,56 @@ const AccessPage: React.FC = () => {
           新增
         </Button>
       </div>
-      <Table dataList={state.dataList} operationalData={operationalData} />
+      <Table
+        dataSource={state.dataList}
+        columns={[
+          {
+            title: 'id',
+            dataIndex: 'id',
+            key: 'id',
+            ellipsis: true,
+          },
+          {
+            title: '名称',
+            dataIndex: 'username',
+            key: 'username',
+            ellipsis: true,
+          },
+          {
+            title: '描述',
+            dataIndex: 'description',
+            key: 'description',
+            ellipsis: true,
+          },
+          {
+            title: '描述',
+            dataIndex: 'type',
+            key: 'type',
+            ellipsis: true,
+          },
+          {
+            title: '操作',
+            width: 160,
+            render: (_text, record) => (
+              <div>
+                <Button
+                  onClick={() => operationalData('put', record)}
+                  type="link"
+                >
+                  编辑
+                </Button>
+                <Button
+                  onClick={() => operationalData('delete', record)}
+                  type="link"
+                  danger
+                >
+                  删除
+                </Button>
+              </div>
+            ),
+          },
+        ]}
+      />
       {AlertContext}
       {MessageContext}
       {NoticeContext}
